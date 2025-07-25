@@ -1,0 +1,45 @@
+<section class="temp">
+  <a href="{{ section.settings.ad-link }}">
+    <picture>
+      {% if section.settings.m-img != blank %}
+        <source media="(max-width: 600px)" srcset="{{ section.settings.m-img | img_url: '' }}">
+        <source media="(min-width: 601px)" srcset="{{ section.settings.d-img | img_url: '' }}">
+      {% endif %}
+      <img src="{{ section.settings.d-img | img_url: '' }}">
+    </picture>
+  </a>
+</section>
+{% schema %}
+  {
+    "name": "Offer Banner",
+    "settings": [
+      {
+        "id" : "ad-link",
+        "type" : "url",
+        "label" : "Ad Target Link"
+      },
+      {
+        "id" : "d-img",
+        "type" : "image_picker",
+        "label" : "Ad Image (Web)"
+      },
+      {
+        "id" : "m-img",
+        "type" : "image_picker",
+        "label" : "Ad Image (Mobile)"
+      }
+    ],
+    "presets" : [
+      {
+        "name" : "Temporary",
+        "category" : "custom"
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

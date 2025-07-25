@@ -1,0 +1,182 @@
+<footer>
+    <div class="brand-guide-mobile">
+      <h3>CORPORATE OFFICE</h3>
+      <p class="collaps-mobile">{{ section.settings.add }}</p>
+      <a class="map-link" href="https://goo.gl/maps/rETLz7sZ1ZWMXuXbA" target="_blank">Open in Map <span>{% render 'map' %}</span></a>
+    </div>
+  <div class="footer-wrapper-hr">
+
+    <div class="brand-guide menu-hr-block">
+      <a href="/"><img src="{{ section.settings.logo | img_url:'' }}" alt="logo"></a>
+      <h3 class="menu-active-m">CORPORATE OFFICE</h3>
+      <p class="collaps-mobile">{{ section.settings.add }}</p>
+      <a class="map-link" href="https://goo.gl/maps/rETLz7sZ1ZWMXuXbA" target="_blank">Open in Map <span>{% render 'map' %}</span></a>
+    </div>
+    {% for block in section.blocks %}
+      <div class="menu-hr-block">
+        <h3>{{ block.settings.menu-title }}</h3>
+        {% assign menu = block.settings.menu  %}
+      <ul class="collaps-mobile">
+        {% for link in menu.links %}
+          <li><a href="{{ link.url }}" target=“_blank”>{{ link.title | escape }}</a></li>
+        {% endfor %}
+      </ul>
+      
+      </div>
+    {% if block.settings.show-social %}
+        <ul class="mobile-social">
+        {% if section.settings.fb_link != blank %}
+        <li>
+          <a href="{{ section.settings.fb_link }}" target="_blank">
+            <span class="icon-box"><img src="https://cdn.shopify.com/s/files/1/0733/2279/1190/files/fb.svg?v=1679675031"></span></a>
+        </li>
+        {% endif %}
+        {% if section.settings.insta_link != blank %}
+        <li>
+          <a href="{{ section.settings.insta_link }}" target="_blank">
+            <span class="icon-box"><img src="https://cdn.shopify.com/s/files/1/0733/2279/1190/files/instagram.svg?v=1679675061"></span></a>
+        </li>
+        {% endif %}
+        {% if section.settings.twitter_link != blank %}
+        <li>
+          <a href="{{ section.settings.twitter_link }}" target="_blank">
+            <span class="icon-box"><img src="https://cdn.shopify.com/s/files/1/0733/2279/1190/files/twitter.svg?v=1679675089"></span></a>
+        </li>
+        {% endif %}
+        {% if section.settings.you_link != blank %}
+        <li>
+          <a href="{{ section.settings.you_link }}" target="_blank">
+            <span class="icon-box"><img src="https://cdn.shopify.com/s/files/1/0733/2279/1190/files/youtube.svg?v=1679675114"></span></a>
+        </li>
+        {% endif %}
+      {% if section.settings.linkedin != blank %}
+        <li>
+          <a href="{{ section.settings.linkedin }}" target="_blank">
+            <span class="icon-box"><img src="https://cdn.shopify.com/s/files/1/0733/2279/1190/files/linkedin.svg?v=1682620629"></span></a>
+        </li>
+        {% endif %}
+      </ul>
+        {% endif %}
+    {% endfor %}
+    <div class="menu-hr-block follow-social">
+      <h3>FOLLOW US</h3>
+      <ul>
+        {% if section.settings.fb_link != blank %}
+        <li>
+          <a href="{{ section.settings.fb_link }}" target="_blank">
+            <span class="icon-box"><img src="https://cdn.shopify.com/s/files/1/0733/2279/1190/files/fb.svg?v=1679675031"></span>Facebook</a>
+        </li>
+        {% endif %}
+        {% if section.settings.insta_link != blank %}
+        <li>
+          <a href="{{ section.settings.insta_link }}" target="_blank">
+            <span class="icon-box"><img src="https://cdn.shopify.com/s/files/1/0733/2279/1190/files/instagram.svg?v=1679675061"></span>Instagram</a>
+        </li>
+        {% endif %}
+        {% if section.settings.twitter_link != blank %}
+        <li>
+          <a href="{{ section.settings.twitter_link }}" target="_blank">
+            <span class="icon-box"><img src="https://cdn.shopify.com/s/files/1/0733/2279/1190/files/twitter.svg?v=1679675089"></span>Twitter</a>
+        </li>
+        {% endif %}
+        {% if section.settings.you_link != blank %}
+        <li>
+          <a href="{{ section.settings.you_link }}" target="_blank">
+            <span class="icon-box"><img src="https://cdn.shopify.com/s/files/1/0733/2279/1190/files/youtube.svg?v=1679675114"></span>Youtube</a>
+        </li>
+        {% endif %}
+        {% if section.settings.linkedin != blank %}
+        <li>
+          <a href="{{ section.settings.linkedin }}" target="_blank">
+            <span class="icon-box"><img src="https://cdn.shopify.com/s/files/1/0733/2279/1190/files/linkedin.svg?v=1682620629"></span>Linkedin</a>
+        </li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+
+<div class="footer-bottom">
+  <div class="footer-compyright-wrapper">
+    <div class="copyright-hr">
+      <p>Copyright © <span id="currentYear"></span> Haldiram UK All Rights Reserved. Developed by <a href="https://www.repindia.com/" target="_blank">Repindia</a></p>
+    </div>
+  </div>
+</div>
+</footer>
+
+<script>
+  const d = new Date();
+  let year = d.getFullYear();
+  document.getElementById("currentYear").innerHTML = year;
+</script>
+{% schema %}
+  {
+    "name": "Footer",
+    "settings": [
+      {
+        "id" : "fb_link",
+        "type" : "url",
+        "label" : "Facebook Link"
+      },
+      {
+        "id" : "insta_link",
+        "type" : "url",
+        "label" : "Instagram Link"
+      },
+      {
+        "id" : "twitter_link",
+        "type" : "url",
+        "label" : "Twitter Link"
+      },
+      {
+        "id" : "you_link",
+        "type" : "url",
+        "label" : "Youtube Link"
+      },
+      {
+        "id" : "linkedin",
+        "type" : "url",
+        "label" : "Linkedin Link"
+      },
+      {
+        "id" : "logo",
+        "type" : "image_picker",
+        "label" : "Footer Logo"
+      },
+      {
+        "id" : "add",
+        "type" : "textarea",
+        "label" : "Store Address"
+      }
+    ],
+    "blocks" : [
+      {
+        "name" : "Menu",
+        "type" : "Menu",
+        "settings" : [
+          {
+            "id" : "show-social",
+            "type" : "checkbox",
+            "label" : "Show Social?"
+          },
+          {
+            "id" : "menu-title",
+            "type" : "text",
+            "label" : "Menu Heading"
+          },
+          {
+            "id" : "menu",
+            "type" : "link_list",
+            "label" : "Menu"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

@@ -1,0 +1,301 @@
+<section class="khaas-product-slider">
+  <div class="khaas-slider-wrapper">
+    <h2>{{ section.settings.heading }}</h2>
+    <p>{{ section.settings.content }}</p>
+  </div>
+  <div class="khaas-product-wrappers">
+    <div class="khaas-collection">
+      {% if collection.metafields.custom.bundle_product != blank %}{% assign collection = collection.metafields.custom.bundle_product %}{% endif %}
+      {% for product in collection.value %}
+      <div class="khaas-slider-item">
+        <div class="khaas-inner-item">
+          <div class="{{ product.bundle_item_name }}">
+            <img src="{{ product.bundle_item_image | image_url: width:'500' }}" loading="lazy" width="100" height="100" alt="">
+          </div>
+          <div class="khaas-product-intro">
+            <h3>{{ product.bundle_item_name }}</h3>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+
+
+<script>
+$(document).ready(function(){
+  $('.khaas-collection').slick({
+  dots: false,
+  arrows: true,
+  speed: 300,
+  autoplay: true,
+  autoplaySpeed: 3000,
+  slidesToShow: 3.5,
+  slidesToScroll: 1,
+  responsive: [
+    {
+      breakpoint: 820,
+      settings: {
+        slidesToShow: 2.5,
+        slidesToScroll: 1,
+        infinite: true
+      }
+    },
+    {
+      breakpoint: 600,
+      settings: {
+        slidesToShow: 2.5,
+        slidesToScroll: 1
+      }
+    },
+    {
+      breakpoint: 480,
+      settings: {
+        slidesToShow: 1.2,
+        slidesToScroll: 1
+      }
+    }
+  ]
+});
+})
+</script>
+
+{% stylesheet %}
+.khaas-slider-wrapper {
+    max-width: 1298px;
+    padding: 0 20px;
+    margin: auto;
+    position: relative;
+    display: grid;
+    align-items: center;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid hwb(0deg 0% 100% / 40%);
+    margin-bottom: 32px;
+}
+.khaas-slider-wrapper h2 {
+    margin: 0;
+    color: #231F20;
+    font-size: 42px;
+    line-height: 42px;
+}
+.khaas-slider-wrapper p {
+    font-size: 14px;
+    margin: 0;
+    line-height: 22.4px;
+    color: #000000;
+    font-style: italic;
+    opacity: .6;
+}
+.khaas-slider-wrapper:before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 0;
+    left: 0;
+    opacity: 1;
+    bottom: -8.5px;
+    position: absolute;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-left: 8px solid transparent;
+    border-top: 8px solid #aaaaaa;
+    transform: rotate(-90deg);
+}
+.khaas-slider-wrapper:after {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 0;
+    right: 0;
+    opacity: 1;
+    bottom: -8.5px;
+    position: absolute;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-left: 8px solid transparent;
+    border-top: 8px solid #aaaaaa;
+    transform: rotate(90deg);
+}
+.khaas-inner-item img {
+    width: 100%;
+    height: auto;
+    max-width: 500px;
+}
+.khaas-collection {
+    display: flex;
+}
+.khaas-product-intro h3 {
+    font-size: 16px;
+    line-height: 24px;
+    color: #231F20;
+    margin: 0;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+span.size-product {
+    text-transform: lowercase;
+    color: #9E9E9E;
+    font-size: 13px;
+}
+.khaas-product-wrappers {
+    max-width: 1420px;
+    margin-left: auto;
+    padding-bottom: 120px;
+}
+.khaas-slider-item {
+    padding: 0 10px;
+} 
+.khaas-product-intro {
+    margin-top: 32px;
+}
+  
+.khaas-product-wrappers .slick-track {
+  margin-left: 15%;
+}
+section.khaas-product-slider {
+    padding: 120px 0 0 20px;
+}
+
+.khaas-product-slider button.slick-prev.slick-arrow {
+    position: absolute;
+    top: unset;
+    bottom: -25%;
+    margin: auto;
+    left: 45%;
+    border: none;
+    right: unset !important;
+    width: 50px;
+    height: 50px;
+    z-index: 1;
+}
+.khaas-product-slider button.slick-next.slick-arrow {
+    top: unset;
+    bottom: -25%;
+    margin: auto;
+    left: unset !important;
+    right: 45%;
+    width: 50px;
+    height: 50px;
+    border: none;
+}
+  
+.khaas-product-slider .slick-next:before {
+    content: "";
+    background: url(https://cdn.shopify.com/s/files/1/0733/2279/1190/files/Frame_40481.svg?v=1728491922);
+    width: auto;
+    display: block;
+    height: 67px;
+    opacity: 1;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+.khaas-product-slider .slick-prev:before {
+    background: url(https://cdn.shopify.com/s/files/1/0733/2279/1190/files/Frame_40482.svg?v=1728491937);
+    width: auto;
+    display: block;
+    height: 67px;
+    background-size: contain;
+    opacity: 1;
+    content: "";
+    background-repeat: no-repeat;
+}
+  
+@media screen and (max-width: 1440px){
+  .khaas-product-wrappers {
+    max-width: 1360px;
+  }
+}
+
+@media screen and (max-width: 1280px){
+  .khaas-product-wrappers {
+    max-width: 1140px;
+  }
+}
+  
+@media screen and (min-width: 1600px){
+  .khaas-product-wrappers {
+    max-width: 1280px;
+    margin: auto;
+  }
+}
+
+@media screen and (max-width: 1024px){
+  .khaas-product-slider button.slick-prev.slick-arrow{
+    left: 43%;
+  }
+  .khaas-product-slider button.slick-next.slick-arrow{
+    right: 43%;
+  }
+}
+  
+@media screen and (max-width: 820px){
+  .khaas-product-wrappers .slick-track {
+    margin-left: 20%;
+  }
+  .khaas-slider-wrapper {
+    grid-template-columns: auto;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  .khaas-product-slider button.slick-arrow, .khaas-product-slider .slick-arrow:before {
+    width: 50px ! Important;
+    height: 30px ! Important;
+  }
+}
+@media screen and (max-width: 480px){
+  .khaas-product-wrappers .slick-track {
+    margin-left: 15%;
+  }
+  .khaas-product-slider button.slick-prev.slick-arrow {
+    top: unset;
+    bottom: -90px;
+    left: 38%;
+  }
+  .khaas-product-slider button.slick-next.slick-arrow {
+    top: unset;
+    bottom: -90px;
+    right: 38%;
+  }
+  .khaas-slider-wrapper h2 {
+    font-size: 28px;
+  }
+  .khaas-slider-wrapper {
+    gap: 10px;
+    padding: 0 20px 32px 0;
+  }
+}
+  
+{% endstylesheet %}
+
+{% schema %}
+  {
+    "name": "Khaas Product Slider",
+    "settings": [
+      {
+        "type": "text",
+        "id": "heading",
+        "label": "Section Heading"
+      },
+      {
+        "type": "textarea",
+        "id": "content",
+        "label": "Section Sub Heading"
+      },
+      {
+        "type" : "collection",
+        "id" : "collection_sel",
+        "label" : "Collection"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Khaas Product Slider"
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,133 @@
+<section class="new-arrival-hr">
+  <div class="new-wrapper-hr">
+
+    <div class="new-arrival-collection">
+      {% assign collection = section.settings.link-collection %}
+          <div class="new-arrival-section-header">
+      <h3>{{ section.settings.title }}</h3>
+      <p>{{ section.settings.sub-title }}</p>
+    </div>
+      
+      <div class="collection-hr-item">
+        {% for product in collection.products %}
+          {% if product.available %}
+          <div class="slider-wrapper">
+        <div class="inncer-container">
+          
+          <a href="{{ product.url | within: collection }}" class="pr-image-hr">
+            {% for media in product.media %}
+              {% if forloop.index == 1 %}
+                <img src="{{ media | img_url:'' }}" width="100%" class="pr-img-main" loading="lazy">
+              {% endif %}
+            {% endfor %}
+          </a>
+          
+          <div class="pr-info">
+          <div class="pr-new-container">
+            <span>New Arrival</span>
+            <a href="{{ product.url | within: collection }}"><h4 class="pr-title-hr">{{ product.title }}</h4></a>
+            <p class="pr-desciption">{{ product.metafields.custom.description_new_arrival_ }}</p>
+            </div>
+            <div>
+            <div class="new-arrival-price-container">
+              <p class="compare-price-hr">{{ product.compare_at_price | money_with_currency }}</p>
+              <p class="sale-price-hr">{{ product.price | money_with_currency }}</p>
+            </div>
+            <form class="new-arrival-form-submit"> 
+                  <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+                  
+              <div class="btn-group-cart">
+                <div class="quantity-selctors-hr">
+                    <div
+                id="Quantity-Form"
+                class="product-form__input product-form__quantity"
+              >
+                {% comment %} TODO: enable theme-check once `item_count_for_variant` is accepted as valid filter {% endcomment %}
+                {% # theme-check-disable %}
+                {%- assign cart_qty = cart | item_count_for_variant: product.selected_or_first_available_variant.id -%}
+                {% # theme-check-enable %}
+                {%- assign cart_qtyna = cart | item_count_for_variant: product.selected_or_first_available_variant.id -%}
+                <quantity--container class="quantity-box" data-valuee-id="{{ product.selected_or_first_available_variant.id }}"> 
+                  <button class="qty-minus minus-btnn button-compare" name="decrease" type="button">
+                    <span class="visually-hidden">
+                      {{- 'products.product.quantity.decrease' | t: product: product.title | escape -}}
+                    </span>
+                    {% render 'icon-minus' %}
+                  </button>
+                  <input
+                    class="new_arrival_qty_input"
+                    type="number"
+                    name="quantity_inputs"
+                    min="0"  
+                    data-max="{{ product.selected_or_first_available_variant.quantity_rule.max }}"
+                    value="{% if cart_qtyna > 0 %}{{ cart_qtyna }}{% else %}0{% endif %}"
+                    form="{{ product.form.id }}"
+                    id="Quantity-{{ section.id }}"
+                    data-cart-quantity="{{ cart_qtyna }}" readonly
+                  />
+                  <button class="qty_plus-btn plus-btnn button-compare" name="increase" type="button">
+                    <span class="visually-hidden">
+                      {{- 'products.product.quantity.increase' | t: product: product.title | escape -}}
+                    </span>
+                    {% render 'icon-plus' %}
+                  </button>
+                </quantity--container>
+              </div>
+                  </div>
+                  <button type="button" class="add-cart-btn" {% if product.available %} {% else %}disabled {% endif %}>
+                    {% if product.available %}
+                    Add to cart<span>+</span>
+                  	{% else %}
+                    Sold Out
+                    {% endif %}
+                  </button>
+                  <div class="wishlist-engine" data-product_id="{{  product.id }}" data-variant_id="{{ product.selected_or_first_available_variant.id }}" data-full_button="true"></div>
+                      </div>
+                </form>
+                      </div>
+          </div>
+        </div>
+                      </div>
+        {% endif %}
+        {% endfor %}
+      </div>
+      
+    </div>
+  </div>
+</section>
+
+{% schema %}
+  {
+    "name": "New Arrival",
+    "settings": [
+      {
+        "id" : "title",
+        "type" : "text",
+        "label" : "Heading",
+        "default" : "New Arrival"
+      },
+      {
+        "id" : "sub-title",
+        "type" : "textarea",
+        "label" : "Sub Heading"
+      },
+      {
+        "id" : "link-collection",
+        "type" : "collection",
+        "label" : "Slider Collection"
+      }
+    ],
+    "presets" : [
+      {
+        "name" : "New Arrivals",
+        "category" : "custom"
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

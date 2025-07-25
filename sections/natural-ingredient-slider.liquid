@@ -1,0 +1,554 @@
+<section class="natural-ingredients-slider">
+  <div class="ing-slider-wrapper">
+    <div class="khaas--header">
+      {% if section.settings.subheading != blank %}<span>{{ section.settings.subheading }}</span>{% endif %}
+      <h2>{{ section.settings.heading }}</h2>
+      <p>{{ section.settings.content }}</p>
+    </div>
+    <div class="khass-ing-slider-wrapper">
+      <div class="ingredients-slider-khaaas">
+        {% for block in section.blocks %}
+        <div class="slider-khaas-item">
+          <div class="khaas-inner">
+            <div class="ingredient-image-kh">
+              <img src="{{ block.settings.ingredients | img_url:'500x' }}" width="100" height="100" loading="lazy" alt="">
+            </div>
+            <div class="ingredient-content-khaas">
+              <div class="in-content">
+                <h3>{{ block.settings.product_name }}</h3>
+                <p>{{ block.settings.description }}</p>
+                <span class="ingredient-splitter"></span>
+                {% assign product = block.settings.product %}
+                <div class="innerblcokcflex">
+                  <div class="khas-contentimage">
+                    <img src="{{ block.settings.sweets | img_url:'500x' }}" width="100" height="100" loading="lazy" alt="">
+                  </div>
+                  <div class="prcontentinner">
+                    <h4>{{ product.title }}</h4>
+                    <span class="size-product">( {{ product.variants[0].title }} )</span>
+                    <div class="price-and--action">
+                        <div class="price-holder-product">{% if product.compare_at_price != blank %}<del>{{ product.compare_at_price | money }}</del>{% endif %}
+                        {{ product.price | money }}</div>
+                      {% comment %}
+                        <div class="action-btns-cart-wish">
+                      
+                        <productform class="pr-from-add">
+                          <form class="product-pick-form">
+                            <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+                            <button type="button" class="add-cart-btn-pr primary-add-to-cart" {% if product.selected_or_first_available_variant.inventory_quantity <= 0 %} disabled{% endif %}>
+                              <span class="text-add">Add +</span> <div class="loader"></div><span class="check" style="display:none;"><i class="fas fa-check"></i></span>
+                            </button>
+                            {%- assign cart_qty = cart | item_count_for_variant: product.selected_or_first_available_variant.id -%}
+                            <quantity_container class="add-cart-quanty" data-value-id="{{ product.selected_or_first_available_variant.id }}">
+                              <button tinvalue="{% if product.tags contains 'TIN SWEETS' %}true{% else %}false{% endif %}" type="button" class="add-plus" id="plus" layer-title="{{ product.title }}"
+                                layer-variant-title="{{ product.selected_or_first_available_variant.title }}"
+                                layer-id="{{ product.selected_or_first_available_variant.id }}"
+                                layer-price="{{ product.selected_or_first_available_variant.price | money_without_currency }}"
+                                layer-brand="{{ product.vendor }}"
+                              layer-cat="{%- for collection in product.collections -%}{{ collection.title }}{% break %}{%- endfor -%}"
+                                ><span>+</span></button>
+                              <input
+                                class="quantity_add_input"
+                                type="number"
+                                name="quantity"
+                                min="0" 
+                                data-max="{%- if product.tags contains 'TIN SWEETS' -%}
+                                  {%- if item.metafields.custom.max_purchase_quantity.value != blank -%}{{ item.metafields.custom.max_purchase_quantity.value }}{%- else -%}4{%- endif -%}
+                                  {%- else -%}{{ product.selected_or_first_available_variant.inventory_quantity }}{%- endif -%}"
+                                
+                                value="{% if cart_qty > 0 %}{{ cart_qty }}{% else %}0{% endif %}"
+                                form="{{ product.form.id }}"
+                                id="Quantity-{{ section.id }}"
+                                data-cart-quantity="{{ cart_qty }}" readonly
+                                >
+                              <button type="button" class="minus" id="minus"><span>-</span></button>
+                            </quantity_container>
+                          </form>
+                        </productform>
+    
+                        <div class="wishlist-engine" data-product_id="{{  product.id }}" data-variant_id="{{ product.selected_or_first_available_variant.id }}" data-full_button="true"></div>
+                      
+                      </div>
+                      {% endcomment %}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="khaas-sweets-image">
+              <img src="{{ block.settings.sweets | img_url:'500x' }}" width="100" height="100" loading="lazy" alt="">
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <div class="section-design-footer">
+    <img src="https://cdn.shopify.com/s/files/1/0733/2279/1190/files/Screenshot_2024-09-03_at_10.35.27_PM_1-removebg-preview.png?v=1728837523" width="78" height="71" alt="" loading="lazy"> 
+  </div>
+</section>
+
+
+<script>
+$(document).ready(function(){
+  $('.ingredients-slider-khaaas').slick({
+    infinite: false,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    fade: true,
+    arrows: true,
+    dots: false,
+    responsive: [
+    {
+      breakpoint: 769,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        dots: true
+      }
+    }
+    ]
+  });
+})
+</script>
+
+{% stylesheet %}
+.slider-khaas-item:not(:first-child){
+  opacity: 0;
+}
+.ing-slider-wrapper {
+    max-width: 1560px;
+    margin: auto;
+}
+section.natural-ingredients-slider {
+    position: relative;
+    padding: 24px 0 0 0;
+}
+.section-design-footer:after {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 0;
+    right: 0;
+    opacity: 1;
+    bottom: -8.5px;
+    position: absolute;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-left: 8px solid transparent;
+    border-top: 8px solid #aaaaaa;
+    transform: rotate(90deg);
+}
+.section-design-footer:before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 0;
+    left: 0;
+    opacity: 1;
+    bottom: -8.5px;
+    position: absolute;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-left: 8px solid transparent;
+    border-top: 8px solid #aaaaaa;
+    transform: rotate(-90deg);
+}
+.section-design-footer {
+    max-width: 1268px;
+    margin: auto;
+    width: 90%;
+    text-align: center;
+    padding: 0 20px;
+    border-bottom: 1px solid hwb(0deg 0% 100% / 40%);
+    position: relative;
+}
+.section-design-footer img{
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    top: -36px;
+}
+.section-design-footer {
+    max-width: 1268px;
+    margin: auto;
+    text-align: center;
+    padding: 0 20px;
+    border-bottom: 1px solid hwb(0deg 0% 100% / 40%);
+    position: relative;
+    margin-top: 84px;
+}
+  
+.khaas--header {
+    max-width: 836px;
+    margin: auto;
+    text-align: center;
+    margin-bottom: 72px;
+}
+.khaas--header span {
+    font-size: 13px;
+    font-weight: 400;
+    font-style: italic;
+    line-height: 16px;
+    margin-bottom: 24px;
+    color: #231F20;
+    display: block;
+}
+.khaas--header h2 {
+    margin: 0;
+    font-size: 42px;
+    font-weight: 400;
+    line-height: 42px;
+}
+.khaas--header p {
+    font-size: 14px;
+    font-style: italic;
+    line-height: 22px;
+    color: #000;
+    opacity: 0.6;
+    padding: 0 24px;
+    margin: 24px 0 0;
+}
+
+.khaas-inner img {
+    width: 100%;
+    height: auto;
+}
+.khaas-inner {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+  align-items: center;
+}
+.ingredient-content-khaas {
+    max-width: 425px;
+    padding: 0 20px;
+}
+.ingredient-content-khaas h3 {
+    font-size: 32px;
+    line-height: 48px;
+    margin: 0;
+    font-weight: 400;
+}
+.ingredient-content-khaas p {
+    font-size: 14px;
+    color: #000;
+    line-height: 22.4px;
+    margin: 32px 0 0 0;
+}
+.ingredient-splitter {
+    width: 100%;
+    display: block;
+    background: hwb(0deg 0% 100% / 40%);
+    height: 1px;
+    margin: 44px 0;
+    position: relative;
+}
+.ingredient-splitter:before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 0;
+    left: 0;
+    opacity: 1;
+    bottom: -8.5px;
+    position: absolute;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-left: 8px solid transparent;
+    border-top: 8px solid #aaaaaa;
+    transform: rotate(-90deg);
+}
+
+.ingredient-splitter:after {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 0;
+    right: 0;
+    opacity: 1;
+    bottom: -8.5px;
+    position: absolute;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-left: 8px solid transparent;
+    border-top: 8px solid #aaaaaa;
+    transform: rotate(90deg);
+}
+
+.ingredient-content-khaas h4 {
+    font-size: 16px;
+    line-height: 24px;
+    color: #231F20;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin: 0;
+}
+span.size-product {
+    text-transform: lowercase;
+    color: #9E9E9E;
+    font-size: 13px;
+}
+
+.price-and--action {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 24px;
+}
+.price-holder-product del {
+    opacity: .4;
+    padding-right: 8px;
+}
+
+.price-holder-product {
+    color: #000;
+    font-size: 16px;
+}
+
+.action-btns-cart-wish .pr-from-add {
+    position: unset;
+    width: auto;
+    height: 40px;
+}
+.action-btns-cart-wish quantity_container {
+    width: 80px;
+    right: 0;
+    background: #d84616 !important;
+    border-radius: 4px;
+}
+.action-btns-cart-wish  button.add-cart-btn-pr {
+    padding: 4px 25px;
+    width: max-content;
+    background: #D84616;
+    height: 40px;
+    border-radius: 4px;
+    line-height: 100%;
+    font-size: 14px;
+}  
+.action-btns-cart-wish span.text-add {
+    top: 0;
+}  
+  
+.action-btns-cart-wish {
+    display: flex;
+    gap: 20px;
+}
+
+.action-btns-cart-wish .wishlist-engine-button {
+    width: 30px;
+    height: 30px;
+    padding: 0;
+}
+  
+.action-btns-cart-wish .wishlist-engine {
+    position: relative;
+    bottom: 0;
+    border: 1px solid #9226371A;
+    width: 40px;
+    height: 40px;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+}
+.khas-contentimage{display:none;}
+
+.natural-ingredients-slider button.slick-prev.slick-arrow {
+    position: absolute;
+    top: unset;
+    bottom: -20px;
+    margin: auto;
+    left: 45%;
+    border: none;
+    right: unset !important;
+    width: auto;
+    height: 67px;
+    z-index: 1;
+}
+.natural-ingredients-slider button.slick-next.slick-arrow {
+    top: unset;
+    bottom: -20px;
+    margin: auto;
+    left: unset !important;
+    right: 45%;
+    width: auto;
+    height: 67px;
+    border: none;
+    z-index: 1;
+}
+
+.natural-ingredients-slider .slick-next:before {
+    content: "";
+    background: url(https://cdn.shopify.com/s/files/1/0733/2279/1190/files/Frame_40481.svg?v=1728491922);
+    width: 50px;
+    display: block;
+    height: 50px;
+    opacity: 1;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+.natural-ingredients-slider .slick-prev:before {
+    background: url(https://cdn.shopify.com/s/files/1/0733/2279/1190/files/Frame_40482.svg?v=1728491937);
+    width: 50px;
+    display: block;
+    height: 50px;
+    background-size: contain;
+    opacity: 1;
+    content: "";
+    background-repeat: no-repeat;
+}
+
+@media screen and (max-width: 1440px){
+  .natural-ingredients-slider button.slick-arrow,.natural-ingredients-slider .slick-arrow:before {
+    width: 70px !Important;
+    height: 50px !Important;
+  }
+}
+
+/* @media screen and (max-width: 1280px){
+  .natural-ingredients-slider button.slick-prev.slick-arrow {
+    left: 28%;
+  }
+  .natural-ingredients-slider button.slick-next.slick-arrow {
+    right: 28%;
+  }
+} */
+
+@media screen and (max-width: 1024px){
+  .natural-ingredients-slider button.slick-prev.slick-arrow {
+    left: 43%;
+  }
+  .natural-ingredients-slider button.slick-next.slick-arrow {
+    right: 43%;
+  }
+}
+  
+@media screen and (max-width: 900px){
+  .khaas-sweets-image {
+    display: none;
+  }
+  .khass-ing-slider-wrapper {
+    padding-bottom: 90px;
+  }
+  .natural-ingredients-slider button.slick-prev.slick-arrow {
+    left: 42%;
+    top: unset;
+    bottom: -100px;
+  }
+  .natural-ingredients-slider button.slick-next.slick-arrow {
+    right: 42%;
+    top: unset;
+    bottom: -100px;
+  }
+  .natural-ingredients-slider .slick-dots {
+    bottom: -60px;
+  }
+}
+
+@media screen and (max-width: 600px){
+  .khaas--header h2 {
+    font-size: 28px;
+    line-height: 28px;
+  }
+  .khaas--header p {
+    margin: 24px 0 0;
+  }
+  .khaas-inner {
+    flex-direction: column;
+  }
+  .price-and--action {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .innerblcokcflex {
+    display: flex;
+    gap: 20px;
+  }
+  .khas-contentimage {
+    display: block;
+    width: 30%;
+  }
+  .natural-ingredients-slider button.slick-arrow, .natural-ingredients-slider .slick-arrow:before {
+    width: 30px ! Important;
+    height: 30px ! Important;
+  }
+  .natural-ingredients-slider button.slick-prev.slick-arrow {
+    left: 30%;
+  }
+  .natural-ingredients-slider button.slick-next.slick-arrow {
+    right: 30%;
+  }
+  .natural-ingredients-slider .slick-dots {
+    bottom: -80px;
+  }
+  .khass-ing-slider-wrapper {
+    padding-bottom: 60px;
+  }
+}
+{% endstylesheet %}
+
+{% schema %}
+  {
+    "name": "Natural Ingedient Slider",
+    "settings": [
+      {
+        "type": "text",
+        "id": "heading",
+        "label": "Section Heading"
+      },
+      {
+        "type": "text",
+        "id": "subheading",
+        "label": "Section Sub-Heading"
+      },
+      {
+        "type": "textarea",
+        "id": "content",
+        "label": "Section Content"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "slide",
+        "name" : "Ingredient Slide",
+        "limit": 8,
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "ingredients",
+            "label": "Ingredient Image"
+          },
+          {
+            "type": "text",
+            "id": "product_name",
+            "label": "Ingredient Name"
+          },
+          {
+            "type": "textarea",
+            "id": "description",
+            "label": "Ingredient Description"
+          },
+          {
+            "type": "product",
+            "id": "product",
+            "label": "Product"
+          },
+          {
+            "type": "image_picker",
+            "id": "sweets",
+            "label": "Sweets Image"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Natural Ingedient Slider"
+      }
+    ]
+  }
+{% endschema %}

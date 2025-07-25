@@ -1,0 +1,25 @@
+<div class="bundle-card-item">
+  <div class="bundle-card-media">
+    <div class="{{ product.bundle_item_name | handleize }}">
+      <img src="{{ product.bundle_item_image | image_url: width: '400' }}" width="100" height='100'  loading="lazy" alt=""/>
+    </div>
+  </div>
+  <div class="bundle-content-desc">
+    <h3>{{ product.bundle_item_name }}</h3>
+    <!-- <span class="size-product">( {{ product.variants[0].title }} )</span> -->
+    <div class="price-and-action">
+      <div class="bundle-card-action">
+
+        <!-- bundle action -->
+        <button type="button" class="action-bundle" data-product="{{ bundle.id }}" data-variant-id="{{ product.bundle_item_name }}" {% unless bundle.available %}disabled{% endunless %}>Add +</button>
+        <div class="bundle-quantity-helper">
+          <div class="quantity--holder">
+            <button type="button" class="minus-quantiy">-</button>
+            <input type="text" class="bundlequantiy" value="0" name="bundle_quanity" readonly>
+            <button type="button" class="plus-quantiy">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

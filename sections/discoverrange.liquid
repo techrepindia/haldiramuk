@@ -1,0 +1,110 @@
+<hr style="background-color:{{ section.settings.background }}" class="borderring-red">
+
+<div class="discoverrange discover--{{ template.name }}" style="background-color:{{ section.settings.background }}">
+  <div class="discoverinner page-width">
+    <div class="discoverhead">
+{%  if section.settings.heading != blank %}
+  <h3>{{ section.settings.heading }}</h3>
+{%  endif %}
+{%  if section.settings.content != blank %}
+{{ section.settings.content }}
+{%  endif %}
+</div>
+  <div class="swiper-discover">
+    <div class="swiper-wrapper-discover">
+      {% for block in section.blocks %}
+        {%  if block.settings.image != blank %}
+      <div class="swiper-slide-discover">
+        <a href="{{ block.settings.link }}">
+        <img src="{{ block.settings.image |img_url:'' }}" alt="{{ block.settings.image.alt }}"/>
+        </a>
+      </div>
+          {%  endif %}
+      {%  endfor %}
+    </div>
+  </div>
+  </div>
+</div>
+<!--   <script>
+    var swiper = new Swiper(".mySwiper-{{ section.id }}", {
+      slidesPerView: 6.5,
+      spaceBetween: 20,
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+      },
+      breakpoints: {
+        390: {
+          slidesPerView: 1.2,
+          spaceBetween: 20,
+        },
+        425: {
+          slidesPerView: 1.2,
+          spaceBetween: 20,
+        },
+        640: {
+          slidesPerView: 1.5,
+          spaceBetween: 20,
+        },
+        768: {
+          slidesPerView: 2.5,
+          spaceBetween: 20,
+        },
+        1024: {
+          slidesPerView: 5,
+          spaceBetween: 20,
+        },
+      },
+    });
+  </script> -->
+{% schema %}
+  {
+    "name": "Discover range",
+    "settings": [
+      {
+        "type":"textarea",
+        "id":"heading",
+        "label":"Heading"
+      },
+       {
+        "type":"richtext",
+        "id":"content",
+        "label":"Content"
+      },
+      {
+        "type":"color",
+        "label":"Background Color",
+        "id":"background"
+      }
+    ],
+    "blocks":[
+      {
+        "name":"discover range",
+        "type":"text",
+        "settings":[
+          {
+        "type":"image_picker",
+        "id":"image",
+        "label":"Discover Image"
+      },
+      {
+        "type":"url",
+        "id":"link",
+        "label":"Link"
+      }
+        ]
+      }
+    ],
+    "presets":[
+      {
+        "name":"Discover range"
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

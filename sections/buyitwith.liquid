@@ -1,0 +1,89 @@
+{% if product.metafields.custom.buy_it_with != blank %}
+  <section class="buy-it-hr">
+    <div class="buy-it-wrapper">
+      <div class="buy-it-header">
+        <h3>{{ section.settings.heading }}</h3>
+      </div>
+      <div class="buy-slider">
+        {% assign ex-collection = product.metafields.custom.buy_it_with.value %}
+        {% for item in ex-collection %}
+          {% if item.available %}
+          <div class="buy-slide-item">
+            <a href="{{ item.url }}">
+              <div class="buy--img">
+                <img src="{{ item | img_url: '' }}" alt="{{ item.title }}">
+              </div>
+              <div class="but-product-info">
+                <h5>{{ item.title }}</h5>
+                <p>{{ item.metafields.custom.short_description }}</p>
+                {%- assign cart_qty = cart | item_count_for_variant: item.selected_or_first_available_variant.id -%}
+                <form class="buy-with-it-add">
+                  <input type="hidden" name="id" value="{{ item.selected_or_first_available_variant.id }}">
+                  <button
+                    tinvalue="{% if item.tags contains 'TIN SWEETS' %}true{% else %}false{% endif %}"
+                    type="submit"
+                    class="btn-buy"
+                    cardvalue="{{ item.selected_or_first_available_variant.id }}"
+                    {% if item.selected_or_first_available_variant.inventory_quantity <= 0 %}
+                      disabled
+                    {% endif %}
+                    data-limit="{% if product.tags contains 'TIN SWEETS' %}true{% else %}false{% endif %}"
+                    data-max="{%- if item.tags contains 'TIN SWEETS' -%}
+                {%- if item.metafields.custom.max_purchase_quantity.value != blank -%}{{ item.metafields.custom.max_purchase_quantity.value }}{%- else -%}4{%- endif -%}
+                {%- else -%}{{ item.selected_or_first_available_variant.inventory_quantity }}{%- endif -%}"
+                    data-cart-total="{{ cart_qty }}"
+                    cardtitle="{{ item.title }}"
+                    cardprice="{{ item.price | money_without_currency }}"
+                    cardvariant="{{ item.selected_or_first_available_variant.title }}"
+                    cardvendor="{{ item.vendor }}"
+                    cardcat="{{ item.metafields.custom.product_popularity }}"
+                  >
+                    <span class="add-label">
+                      {%- if item.selected_or_first_available_variant.inventory_quantity > 0 -%}
+                        Add +
+                      {%- else -%}
+                        Sold Out
+                      {%- endif -%}
+                    </span>
+                    <div class="lds-dual-ring"></div>
+                  </button>
+                </form>
+              </div>
+            </a>
+          </div>
+        {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Buy With It",
+  "settings": [
+    {
+      "id" : "heading",
+      "type" : "text",
+      "label" : "Heading"
+    },
+    {
+      "id" : "buy",
+      "type" : "collection",
+      "label" : "Collection"
+    }
+  ],
+  "presets" : [
+    {
+      "name" : "Buy With It",
+      "category" : "custom"
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

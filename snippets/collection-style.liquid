@@ -1,0 +1,44 @@
+<style>
+  {% if template contains 'collection' %}
+    .grid-pr-hr {
+        row-gap: 20px;
+    }
+  @media screen and (max-width: 1920px){
+    .pr-item {
+      padding: 40px 30px;
+    }
+  }
+  @media screen and (max-width: 1792px){
+    .pr-item {
+      padding: 20px 30px !Important;
+    }
+  }
+  
+/*   @media screen and (max-width: 1440px){
+    .pr-item {
+      padding: 20px 30px !Important;
+    }
+  } */
+    @media screen and (max-width: 1280px){
+    .pr-item {
+      padding: 20px 20px !Important;
+    }
+  }
+  @media screen and (max-width: 900px){
+    .grid-pr-hr {
+    row-gap: 0;
+}
+  }
+  @media screen and (max-width: 600px){
+    .pr-item {
+    padding: 20px 0px !Important;
+    margin: 10px;
+    }
+  }
+  @media screen and (max-width: 426px){
+    li.grid__item--pr {
+      width: 100%;
+    }
+  }
+  {% endif %}
+</style>

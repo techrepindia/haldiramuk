@@ -1,0 +1,195 @@
+<a href="{{ pr-item.url | within: collection }}">
+<div class="pr-item" style="background-image: url('https://cdn.shopify.com/s/files/1/0733/2279/1190/files/Asset_1_1.svg?v=1683708178');">
+
+  <img class="frame-product" src="https://cdn.shopify.com/s/files/1/0733/2279/1190/files/Asset_1.svg?v=1680351708" >
+<!--   
+  <picture class="desktop-only">
+    <source srcset="https://cdn.shopify.com/s/files/1/0733/2279/1190/files/framenew.svg?v=1682760970" media="(min-width: 1026px)" >
+    <source srcset="https://cdn.shopify.com/s/files/1/0733/2279/1190/files/tab-frame.svg?v=1682762017" media="(max-width: 1025px)" >
+    <source srcset="https://cdn.shopify.com/s/files/1/0733/2279/1190/files/Mob-frame-1.svg?v=1682762731" media="(max-width: 425px)">
+    <img data-src="https://cdn.shopify.com/s/files/1/0733/2279/1190/files/framenew.svg?v=1682760970"  class="backimg">
+  </picture>
+  <picture class="mobile-only">
+    <source srcset="https://cdn.shopify.com/s/files/1/0733/2279/1190/files/Mob-frame-1.svg?v=1682762731" media="(max-width: 426px)">
+    <img data-src="https://cdn.shopify.com/s/files/1/0733/2279/1190/files/Mob-frame-1.svg?v=1682762731"  class="backimg">
+  </picture> -->
+<!--   <div class="frame-product">{% render 'frame' %}</div> -->
+  <a href="{{ pr-item.url | within: collection }}" class="pr-item-block-link product-view" name="{{ pr-item.title }}" 
+    prid="{{ pr-item.selected_or_first_available_variant.id }}"
+    price="{{ pr-item.selected_or_first_available_variant.price | money_without_currency }}"
+    brand="{{ pr-item.vendor }}"
+    category="{{ pr-item.metafields.custom.product_popularity }}"
+    variant="{{ pr-item.selected_or_first_available_variant.title }}"
+    position="{{ forloop.index }}"
+    durl="{{ pr-item.url }}"
+    >
+    <div class="img-container-pr">
+      {% for tag in pr-item.tags %}
+      {% if tag contains 'wc-' %}
+        <p class="sale-tag-wc">{{ tag | remove : 'wc-' }}</p>
+      {% endif %}
+    {% endfor %}
+      {% for media in pr-item.media %}
+        {% if forloop.index == 1 %}
+          <img src="{{ media | img_url: '' }}" alt="{{ media.alt }}">
+        {% endif %}
+      {% endfor %}
+    </div>
+    <div class="pr-item-infobox">
+      <span class="pr-tag">{{ pr-item.metafields.custom.product_popularity }}</span>
+      <p>{{ pr-item.title }}</p>
+      <span class='chilled-wraning'>{% if pr-item.tags contains 'chilled-sweets' %}Only available for pickup.{% endif %}</span>
+      <div class="pr-price">
+        <p class="sale-pr-price">{{ pr-item.compare_at_price | money_with_currency }}</p>
+        <p class="compare-at-pr-price">{{ pr-item.price | money_with_currency }}</p>
+      </div>
+      
+    </div>
+  </a>
+  {%- unless pr-item.tags contains 'chilled-sweets' -%}
+  <productform class="pr-from-add">
+        <form class="product-pick-form">
+          <input type="hidden" name="id" value="{{ pr-item.selected_or_first_available_variant.id }}">
+          <button type="button" class="add-cart-btn-pr primary-add-to-cart" {% if pr-item.selected_or_first_available_variant.inventory_quantity <= 0 %} disabled{% endif %}>
+            <span class="text-add">+</span> <div class="loader"></div><span class="check" style="display:none;"><i class="fas fa-check"></i></span>
+          </button>
+          {%- assign cart_qty = cart | item_count_for_variant: pr-item.selected_or_first_available_variant.id -%}
+          <quantity_container class="add-cart-quanty" data-value-id="{{ pr-item.selected_or_first_available_variant.id }}">
+            <button tinvalue="{% if pr-item.tags contains 'TIN SWEETS' %}true{% else %}false{% endif %}" type="button" class="add-plus" id="plus" layer-title="{{ pr-item.title }}"
+              layer-variant-title="{{ pr-item.selected_or_first_available_variant.title }}"
+              layer-id="{{ pr-item.selected_or_first_available_variant.id }}"
+              layer-price="{{ pr-item.selected_or_first_available_variant.price | money_without_currency }}"
+              layer-brand="{{ pr-item.vendor }}"
+            layer-cat="{%- for collection in pr-item.collections -%}{{ collection.title }}{% break %}{%- endfor -%}"
+              ><span>+</span></button>
+            <input
+              class="quantity_add_input"
+              type="number"
+              name="quantity"
+              min="0" 
+              data-max="{%- if pr-item.tags contains 'TIN SWEETS' -%}
+                {%- if item.metafields.custom.max_purchase_quantity.value != blank -%}{{ item.metafields.custom.max_purchase_quantity.value }}{%- else -%}4{%- endif -%}
+                {%- else -%}{{ pr-item.selected_or_first_available_variant.inventory_quantity }}{%- endif -%}"
+              
+              value="{% if cart_qty > 0 %}{{ cart_qty }}{% else %}0{% endif %}"
+              form="{{ pr-item.form.id }}"
+              id="Quantity-{{ section.id }}"
+              data-cart-quantity="{{ cart_qty }}" readonly
+              >
+            <button type="button" class="minus" id="minus"><span>-</span></button>
+          </quantity_container>
+        </form>
+      </productform>
+ {%- endunless -%}
+  <div class="wishlist-engine" data-product_id="{{  pr-item.id }}" data-variant_id="{{ pr-item.selected_or_first_available_variant.id }}" data-full_button="true"></div>
+</div>
+</a>
+
+<style>
+  {% if template contains 'collection' %}
+    .grid-pr-hr {
+        row-gap: 20px;
+    }
+  productform.pr-from-add {
+    right: 22%;
+  }
+  @media screen and (max-width: 1920px){
+    .pr-item {
+      padding: 40px 30px;
+    }
+  }
+  @media screen and (max-width: 1440px){
+    .pr-item {
+      padding: 20px 30px;
+    }
+    productform.pr-from-add {
+    right: 24%;
+}
+  }
+    @media screen and (max-width: 1280px){
+    .pr-item {
+      padding: 20px 20px;
+    }
+     productform.pr-from-add {
+    right: 28%;
+    bottom: 30px !important;
+    }
+      .pr-item .wishlist-engine {
+    bottom: 30px !important;
+      }
+  }
+  @media screen and (max-width: 1024px){
+    productform.pr-from-add {
+    bottom: 25px !important;
+  }
+  }
+  @media screen and (max-width: 900px){
+    .grid-pr-hr {
+    row-gap: 20px;
+}
+  }
+  @media screen and (max-width: 768px){
+    .pr-item .wishlist-engine {
+    bottom: 20px !important;
+    }
+    productform.pr-from-add {
+    bottom: 15px !important;
+  }
+  }
+  @media screen and (max-width: 600px){
+    .pr-item {
+    padding: 20px 0px;
+    margin: 10px;
+    }
+  }
+  @media screen and (max-width: 426px){
+    li.grid__item--pr {
+      width: 100%;
+    }
+  }
+  {% endif %}
+
+
+{% if template contains 'collection' %}
+  @media screen and (max-width: 1280px){
+  a.pr-item-block-link {
+    padding: 20px 0 0px;
+  }
+    .pr-item-infobox {
+    padding-bottom: 0;
+}
+  }
+    @media screen and (max-width: 1024px){
+      .pr-item {
+        padding: 10px 20px !important;
+      }
+      .frame-product {
+        height: 100%;
+      }
+      productform.pr-from-add {
+        bottom: 25px;
+        right: 70px;
+      }
+      .pr-item .wishlist-engine {
+    bottom: 25px!important;
+    right: 6%!important;
+}
+      
+    }
+  @media screen and (max-width: 600px){
+    productform.pr-from-add {
+      bottom: 10px;
+    }
+    .pr-item .wishlist-engine {
+    bottom: 15px!important;
+    }
+  }
+
+  @media screen and (max-width: 426px){
+    productform.pr-from-add {
+      bottom: 15px !important;
+      right: 80px;
+    }
+  }
+{% endif %}
+</style>

@@ -1,0 +1,33 @@
+<div class="frame-wrapper">
+  {% for block in section.blocks %}
+    <div class="blockmg block--{{ forloop.index }}">
+      <img src="{{ block.settings.img-one | img_url: '' }}" class="img--{{ forloop.index }}">
+      <img src="{{ block.settings.img-two | img_url: '' }}" class="img--{{ forloop.index }}">
+    </div>
+  {% endfor %}
+</div>
+
+<style>
+  .mobile-frame {
+    display: none;
+}
+  .frame-wrapper {
+    display: flex;
+    gap: 21px;
+}
+  .blockmg.block--1 {
+    position: relative;
+    top: 100px;
+}
+.frame-wrapper img:hover {
+    filter: unset;
+}
+  @media screen and (max-width: 600px){
+    .mobile-frame {
+      display: block;
+    }
+    .desktop-frame{
+      display:none;
+    }
+  }
+</style>

@@ -1,0 +1,140 @@
+<section class="ingredients-khaas">
+  <div class="ingredients-wrapper">
+    <div class="ingredients-content">
+      <p>{{ section.settings.content }}</p>
+    </div>
+  </div>
+</section>
+
+{% style %}
+.ingredients-wrapper {
+    position: relative;
+    max-width: 1298px;
+    margin: auto;
+    border-top: 1px solid hwb(0deg 0% 100% / 40%);
+}
+.ingredients-wrapper:after,.ingredients-content:after {
+   content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 0;
+    right: 0;
+    opacity: 1;
+    top: -8.5px;
+    position: absolute;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-left: 8px solid transparent;
+    border-top: 8px solid #aaaaaa;
+    transform: rotate(90deg);
+}
+.ingredients-wrapper:before,.ingredients-content:before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 0;
+    left: 0;
+    opacity: 1;
+    top: -8.5px;
+    position: absolute;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-left: 8px solid transparent;
+    border-top: 8px solid #aaaaaa;
+    transform: rotate(-90deg);
+}
+.ingredients-content:after {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 0;
+    right: 0;
+    top: unset;
+    opacity: 1;
+    bottom: -8.5px;
+    position: absolute;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-left: 8px solid transparent;
+    border-top: 8px solid #aaaaaa;
+    transform: rotate(90deg);
+}
+.ingredients-content:before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 0;
+    left: 0;
+    top: unset;
+    opacity: 1;
+    bottom: -8.5px;
+    position: absolute;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-left: 8px solid transparent;
+    border-top: 8px solid #aaaaaa;
+    transform: rotate(-90deg);
+}
+.ingredients-content {
+    position: relative;
+    border-bottom: 1px solid hwb(0deg 0% 100% / 40%);
+    padding: 120px 0;
+}
+
+.ingredients-content p {
+    margin: 0 auto;
+    max-width: 858px;
+    text-align: center;
+    line-height: 58.8px;
+    font-size: 42px;
+    color: #000;
+}
+.ingredients-content p span{
+  font-style: italic;
+  color: #D84616;
+}
+section.ingredients-khaas:after {
+    content: url(https://cdn.shopify.com/s/files/1/0733/2279/1190/files/Screenshot_2024-09-03_at_10.35.27_PM_1-removebg-preview.png?v=1728837523);
+    width: 73px;
+    height: 71px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    bottom: -33px;
+}
+
+section.ingredients-khaas {
+    margin-bottom: 80px;
+    position: relative;
+    padding: 0 20px;
+}
+
+@media screen and (max-width: 600px){
+  .ingredients-content {
+    padding: 96px 0;
+  }
+  .ingredients-content p {
+    line-height: 39.2px;
+    font-size: 28px;
+  }
+}
+{% endstyle %}
+
+{% schema %}
+  {
+    "name": "Khaas Ingredients",
+    "settings": [
+      {
+        "type": "textarea",
+        "id": "content",
+        "label": "Ingredients Content"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Khaas Ingredients"
+      }
+    ]
+  }
+{% endschema %}

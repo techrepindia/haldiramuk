@@ -1,0 +1,163 @@
+{{ 'customer.css' | asset_url | stylesheet_tag }}
+
+<div class="customer register login-container">
+
+  <h1 id="register">
+    {{ 'customer.register.title' | t }}
+  </h1>
+  <p>Sign up now and discover the delightful wonders of Haldiram.</p>
+  {%- form 'create_customer', novalidate: 'novalidate' -%}
+    <input type="hidden" name="return_to" value="/account">
+    {%- if form.errors -%}
+      <h2 class="form__message" tabindex="-1" autofocus>
+        <svg aria-hidden="true" focusable="false">
+          <use href="#icon-error" />
+        </svg>
+        {{ 'templates.contact.form.error_heading' | t }}
+      </h2>
+      <ul>
+        {%- for field in form.errors -%}
+          <li>
+            {%- if field == 'form' -%}
+              {{ form.errors.messages[field] }}
+            {%- else -%}
+              <a href="#RegisterForm-{{ field }}">
+                {{ form.errors.translated_fields[field] | capitalize }}
+                {{ form.errors.messages[field] }}
+              </a>
+            {%- endif -%}
+          </li>
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+    <div class="field-form">
+    <label for="RegisterForm-FirstName">
+        First name*
+      </label>
+      <input
+        type="text"
+    class="fname"
+        name="customer[first_name]"
+        id="RegisterForm-FirstName"
+        {% if form.first_name %}
+          value="{{ form.first_name }}"
+        {% endif %}
+        autocomplete="given-name"
+       required
+      >
+      <p class="fname-emp-error error-field" style="display:none;">First Name Can't be blank!!</p>
+    </div>
+    <div class="field-form">
+    <label for="RegisterForm-LastName">
+        Last name
+      </label>
+      <input
+        type="text"
+    class="lname"
+        name="customer[last_name]"
+        id="RegisterForm-LastName"
+        {% if form.last_name %}
+          value="{{ form.last_name }}"
+        {% endif %}
+        autocomplete="family-name"
+      >
+    </div>
+    <div class="field-form">
+    <label for="RegisterForm-email">
+        Enter Email ID*
+      </label>
+      <input
+        type="email"
+    class="email-register"
+        name="customer[email]"
+        id="RegisterForm-email"
+        {% if form.email %}
+          value="{{ form.email }}"
+        {% endif %}
+        spellcheck="false"
+        autocapitalize="off"
+        autocomplete="email"
+        aria-required="true"
+        {% if form.errors contains 'email' %}
+          aria-invalid="true"
+          aria-describedby="RegisterForm-email-error"
+        {% endif %}required
+      >
+      <p class="email-emp-error error-field" style="display:none;">Email Can't be blank!!</p>
+    </div>
+    {%- if form.errors contains 'email' -%}
+      <span id="RegisterForm-email-error" class="form__message">
+        <svg aria-hidden="true" focusable="false">
+          <use href="#icon-error" />
+        </svg>
+        {{ form.errors.translated_fields.email | capitalize }}
+        {{ form.errors.messages.email }}.
+      </span>
+    {%- endif -%}
+    <div class="field-form">
+      <label for="RegisterForm-password">
+        Enter Password *
+      </label>
+      <input
+        type="password"
+        class="passreg"
+        name="customer[password]"
+        id="RegisterForm-password"
+        aria-required="true"
+        {% if form.errors contains 'password' %}
+          aria-invalid="true"
+          aria-describedby="RegisterForm-password-error"
+        {% endif %}
+    required
+      >
+      <p class="pass-emp-error error-field" style="display:none;">Password Can't be blank!!</p>
+    </div>
+    {%- if form.errors contains 'password' -%}
+      <span id="RegisterForm-password-error" class="form__message">
+        <svg aria-hidden="true" focusable="false">
+          <use href="#icon-error" />
+        </svg>
+        {{ form.errors.translated_fields.password | capitalize }}
+        {{ form.errors.messages.password }}.
+      </span>
+    {%- endif -%}
+    <button class="form-register">
+      {{ 'customer.register.submit' | t }}
+    </button>
+  {%- endform -%}
+</div>
+            <a class="take-to-register" href="{{ routes.account_login_url }}">
+        Already have an account? <span>Login</span> <span><i class="far fa-arrow-right"></i></span>
+      </a>
+
+{% schema %}
+{
+  "name": "t:sections.main-register.name",
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 36
+    }
+  ]
+}
+{% endschema %}

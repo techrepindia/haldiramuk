@@ -1,0 +1,165 @@
+{%- if template contains 'collection' -%}
+  <script>
+    // Measures product impressions and also tracks a standard
+    // pageview for the tag configuration.
+    // Product impressions are sent by pushing an impressions object
+    // containing one or more impressionFieldObjects.
+    dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
+    dataLayer.push({
+      'ecommerce': {
+        'currencyCode': '{{ shop.currency }}',                       // Local currency is optional.
+        'impressions': [
+          {% for product in collection.products %}
+         {
+           'name': '{{ product.title }}',       // Name or ID is required.
+           'id': '{{ product.selected_or_first_available_variant.id }}',
+           'price': '{{ product.selected_or_first_available_variant.price | money_without_currency }}',
+           'brand': '{{ product.vendor }}',
+           'category': '{{ collection.title }}',
+           'variant': '{{ product.selected_or_first_available_variant.title }}',
+           'list': 'Collection',
+           'position': {{forloop.index}}
+         }{%- if forloop.last -%}{%- else -%},{%- endif -%}{% endfor %}
+         ]
+      }
+    });
+  </script>
+{%- endif -%}
+{%- if template contains 'product' -%}
+  <script>
+    // Measure a view of product details. This example assumes the detail view occurs on pageload,
+    // and also tracks a standard pageview of the details page.
+    dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
+    dataLayer.push({
+      'ecommerce': {
+        'detail': {
+          'actionField': {'list': '{{ product.metafields.custom.product_popularity }}'},    // 'detail' actions have an optional list property.
+          'products': [{
+            'name': '{{ product.title }}',         // Name or ID is required.
+            'id': '{{ product.selected_or_first_available_variant.id }}',
+            'price': '{{ product.selected_or_first_available_variant.price | money_without_currency }}',
+            'brand': '{{ product.vendor }}',
+            'category': '{{collection.title}}',
+            'variant': '{{ product.selected_or_first_available_variant.title }}'
+           }]
+         }
+       }
+    });
+  </script>
+{%- endif -%}
+<script>
+    // Measure adding a product to a shopping cart by using an 'add' actionFieldObject
+    // and a list of productFieldObjects.
+
+  $(document).ready(function(){
+    $('.add-plus').click(function(){
+        dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
+        dataLayer.push({
+          'event': 'addToCart',
+          'ecommerce': {
+            'currencyCode': '{{ shop.currency }}',
+            'add': {                                // 'add' actionFieldObject measures.
+              'products': [{                        //  adding a product to a shopping cart.
+                'name': $(this).attr('layer-title'),
+                'id': $(this).attr('layer-id'),
+                'price': $(this).attr('layer-price'),
+                'brand': $(this).attr('layer-brand'),
+                'category': $(this).attr('layer-cat'),
+                'variant': $(this).attr('layer-variant-title'),
+                'quantity': 1
+               }]
+            }
+          }
+        });
+    });
+
+    // buy it with
+    $('.btn-buy').click(function(){
+        dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
+        dataLayer.push({
+          'event': 'addToCart',
+          'ecommerce': {
+            'currencyCode': '{{ shop.currency }}',
+            'add': {                                // 'add' actionFieldObject measures.
+              'products': [{                        //  adding a product to a shopping cart.
+                'name': $(this).attr('cardtitle'),
+                'id': $(this).attr('cardvalue'),
+                'price': $(this).attr('cardprice'),
+                'brand': $(this).attr('cardvendor'),
+                'category': $(this).attr('cardcat'),
+                'variant': $(this).attr('cardvariant'),
+                'quantity': 1
+               }]
+            }
+          }
+        });
+      });
+
+    // PDP addto cart layer push
+    $('.product-form__submit').click(function(){
+        dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
+        dataLayer.push({
+          'event': 'addToCart',
+          'ecommerce': {
+            'currencyCode': '{{ shop.currency }}',
+            'add': {                                // 'add' actionFieldObject measures.
+              'products': [{                        //  adding a product to a shopping cart.
+                'name': $(this).attr('layer-title'),
+                'id': $(this).attr('layer-id'),
+                'price': $(this).attr('layer-price'),
+                'brand': $(this).attr('layer-brand'),
+                'category': $(this).attr('layer-cat'),
+                'variant': $(this).attr('layer-variant-title'),
+                'quantity': 1
+               }]
+            }
+          }
+        });
+    });
+
+    // Remove product from cart
+    $(document).on("click", '.layer-push-remove-item', function(event) {
+      // Measure the removal of a product from a shopping cart.
+      dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
+      dataLayer.push({
+        'event': 'removeFromCart',
+        'ecommerce': {
+          'remove': {                               // 'remove' actionFieldObject measures.
+            'products': [{                          //  removing a product to a shopping cart.
+                'name': $(this).attr('item-title'),
+                'id': $(this).attr('item-id'),
+                'price': $(this).attr('item-price'),
+                'brand': $(this).attr('item-vendor'),
+                'category': $(this).attr('item-cat'),
+                'variant': $(this).attr('item-variant'),
+                'quantity': $(this).attr('item-qty')
+            }]
+          }
+        }
+      });
+    });
+
+    // Product click
+    $('.product-view').click(function(){
+      dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
+      dataLayer.push({
+        'event': 'productClick',
+        'ecommerce': {
+          'click': {
+            'actionField': {'list': '{% if template contains 'collection' %}Collection{% elsif template contains 'search' %}Search Results{% endif %}'},      // Optional list property.
+            'products': [{
+              'name': $(this).attr('name'),                      // Name or ID is required.
+              'id': $(this).attr('prid'),
+              'price': $(this).attr('price'),
+              'brand': $(this).attr('brand'),
+              'category': $(this).attr('cat'),
+              'variant': $(this).attr('variant'),
+              'position': $(this).attr('position')
+             }]
+           }
+         }
+        });
+      });
+
+  });
+</script>

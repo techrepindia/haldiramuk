@@ -1,0 +1,14 @@
+<!-- Add the page title -->
+<div class="secondary-page-header">
+  <h1 class="gallery-page">{{ page.title }}</h1>
+  <div>{% render 'separator' %}</div>
+</div>
+
+<!-- Add the page description -->
+<div class="page-description">
+  {{ page.description }}
+  <p style= text-align: justify;>Celebrate our journey of excellence through our Awards Page, where we showcase the prestigious accolades and recognitions that reflect our commitment to quality, innovation, and customer satisfaction. Each award is a testament to our relentless pursuit of excellence and the trust our customers place in us. Explore the milestones that highlight our achievements in the industry.</p>
+</div>
+
+<!-- Include the gallery section -->
+{% section 'gallery' %}

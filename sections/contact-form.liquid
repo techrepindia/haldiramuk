@@ -1,0 +1,473 @@
+{{ 'section-contact-form.css' | asset_url | stylesheet_tag }}
+
+<div class="container-contact">
+  <div class="row-contact">
+    <div class="column1" style="background-color:#fff;">
+      <div class="inner_container">
+        <div id="HASH_contact">
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+                d="M6.30053 12.4011C3.04962 12.4011 0.399414 9.75681 0.399414 6.50001C0.399414 3.24322 3.04373 0.598907 6.30053 0.598907C9.55733 0.598907 12.2016 3.24322 12.2016 6.50001C12.2016 9.75681 9.55733 12.4011 6.30053 12.4011ZM6.30053 1.84745C3.73279 1.84745 1.64797 3.93227 1.64797 6.50001C1.64797 9.06776 3.73279 11.1526 6.30053 11.1526C8.86828 11.1526 10.9531 9.06776 10.9531 6.50001C10.9531 3.93227 8.86828 1.84745 6.30053 1.84745Z"
+                fill="#922637" />
+          </svg>
+
+          <span class="contact">{{ page.title | upcase }}</span>
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+                d="M6.30053 12.4011C3.04962 12.4011 0.399414 9.75681 0.399414 6.50001C0.399414 3.24322 3.04373 0.598907 6.30053 0.598907C9.55733 0.598907 12.2016 3.24322 12.2016 6.50001C12.2016 9.75681 9.55733 12.4011 6.30053 12.4011ZM6.30053 1.84745C3.73279 1.84745 1.64797 3.93227 1.64797 6.50001C1.64797 9.06776 3.73279 11.1526 6.30053 11.1526C8.86828 11.1526 10.9531 9.06776 10.9531 6.50001C10.9531 3.93227 8.86828 1.84745 6.30053 1.84745Z"
+                fill="#922637" />
+          </svg>
+        </div>
+
+        <h1>{{ section.settings.pge-title }}</h1>
+
+        <div class="text">{{ section.settings.sub-title }}</div>
+
+        <div class="design">
+          <svg
+            width="279"
+            height="30"
+            viewBox="0 0 299 30"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+                d="M11.8663 0.286055C6.04178 0.286055 2.58474 5.33321 2.20782 5.91625C1.85446 6.45807 1.53644 7.04111 1.27142 7.6536C-0.283361 11.2049 0.0758877 15.1448 2.24905 18.4664C4.51055 21.9234 8.31506 23.9906 12.4199 23.9906H26.9548C27.2964 23.9906 27.5791 23.7138 27.5791 23.3663C27.5791 23.0189 27.3023 22.7421 26.9548 22.7421H12.4199C8.73909 22.7421 5.32328 20.8869 3.29146 17.7832C1.35387 14.8268 1.03585 11.3109 2.41395 8.14831C2.64952 7.6006 2.93221 7.08234 3.25024 6.59352C3.59182 6.06937 6.71905 1.42859 11.99 1.5287C15.3469 1.57582 19.2869 3.39562 20.3116 6.78787C20.9771 8.99637 20.5943 12.6949 18.1385 13.8904C16.7309 14.5736 15.1643 14.1672 14.3516 13.8668C14.0336 13.7491 13.6685 13.9081 13.5507 14.232C13.4329 14.5559 13.5919 14.9151 13.9158 15.0329C14.917 15.404 16.8605 15.8987 18.6862 15.0094C21.6014 13.59 22.42 9.44985 21.5072 6.42863C20.3116 2.46511 15.824 0.33317 12.0077 0.286055C11.9606 0.286055 11.9134 0.286055 11.8722 0.286055H11.8663Z"
+                fill="#922637" />
+            <rect width="120.327" height="1.24854" rx="0.624269"
+                transform="matrix(1 0 0 -1 18.9834 23.9965)" fill="#922637" />
+            <path
+                d="M286.721 0.286026C286.674 0.286026 286.633 0.286026 286.586 0.286026C282.776 0.339029 278.288 2.46508 277.086 6.43448C276.174 9.45571 276.992 13.5959 279.907 15.0152C281.727 15.9045 283.677 15.4098 284.678 15.0388C285.002 14.921 285.167 14.5618 285.043 14.2378C284.925 13.9139 284.56 13.7549 284.242 13.8727C283.429 14.1731 281.863 14.5794 280.455 13.8963C277.999 12.7007 277.616 9.00223 278.282 6.79373C279.307 3.40148 283.247 1.58168 286.604 1.53456C286.645 1.53456 286.686 1.53456 286.721 1.53456C291.892 1.53456 294.996 6.07524 295.337 6.59939C295.656 7.08231 295.938 7.60646 296.174 8.15417C297.552 11.3167 297.234 14.8268 295.296 17.7891C293.264 20.8928 289.849 22.7479 286.168 22.7479H271.462C271.121 22.7479 270.838 23.0247 270.838 23.3722C270.838 23.7197 271.115 23.9965 271.462 23.9965H286.168C290.273 23.9965 294.077 21.9293 296.339 18.4723C298.512 15.1566 298.865 11.2107 297.316 7.65947C297.051 7.05286 296.733 6.46393 296.38 5.92211C296.003 5.34496 292.54 0.291914 286.721 0.291914V0.286026Z"
+                fill="#922637" />
+            <rect width="120.327" height="1.24854" rx="0.624269"
+                transform="matrix(1 0 0 -1 158.911 23.9965)" fill="#922637" />
+            <path
+                d="M148.917 17.4828C145.666 17.4828 143.016 20.1271 143.016 23.3839C143.016 26.6407 145.66 29.285 148.917 29.285C152.174 29.285 154.818 26.6407 154.818 23.3839C154.818 20.1271 152.174 17.4828 148.917 17.4828ZM148.917 28.0365C146.349 28.0365 144.264 25.9517 144.264 23.3839C144.264 20.8162 146.349 18.7314 148.917 18.7314C151.484 18.7314 153.569 20.8162 153.569 23.3839C153.569 25.9517 151.484 28.0365 148.917 28.0365Z"
+                fill="#922637" />
+          </svg>
+        </div>
+
+        <div class="contact_us">
+          <div class="divA">
+            <h4 class="corporate">{{ section.settings.adhead }}</h4>
+
+            <p class="number">
+              {{ section.settings.add }}
+            </p>
+
+            <div id="HASH_map">
+            <a target="_blank" href="{{ section.settings.mapurl }}"><span class="map">Open on map</span>
+            <svg
+                width="20"
+                height="21"
+                viewBox="0 0 20 21"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M5.83301 14.8807L14.1663 6.54732" stroke="#7F5B98" stroke-width="1.5"
+                    stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M5.83301 6.54732H14.1663V14.8807" stroke="#7F5B98" stroke-width="1.5"
+                    stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+              </a>
+
+              
+            </div>
+          </div>
+          <div class="divB">
+            <div class="box1">
+              <p class="call">Call?</p>
+              <a href="tel:{{ shop.phone }}" class="number">{{ shop.phone }}</a>
+            </div>
+            <div class="box2">
+              <p class="email">Email us</p>
+              <a href="mailto:support@haldiramuk.com" class="e-address">{{ shop.email }}</a>
+            </div>
+          </div>
+        </div>
+
+        <a target="_blank" class="faq-linlkk" href="{{ section.settings.faq-link }}">
+          <div id="HASH_query">
+            Find your query on frequently asked questions.
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5 12H19" stroke="#1E1E1E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M12 5L19 12L12 19" stroke="#1E1E1E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </a>
+      </div>
+    </div>
+    <div class="column2" style="background-color:#F8F8F8;">
+      <div id="wrapper">
+        <div id="contact_form_div">
+          <p id="contact_label">Enquiry Form</p>
+          {%- form 'contact', id: 'ContactForm', class: 'isolate' -%}
+            <div id="HASH">
+              <label for="yourname">Your Name</label>
+              <span class="required">(REQUIRED) </span>
+            </div>
+            <p>
+            <input type="text" 
+            autocomplete="name"
+            type="text"
+            id="ContactForm-name"
+            name="contact[{{ 'templates.contact.form.name' | t }}]"
+            value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}"
+            >
+            <span class="c_name-error error-field" style="display:none;">Name is Required!</span>
+            </p>
+            <div id="HASH">
+              <label for="yourname">Email Id</label>
+              <span class="required">(REQUIRED) </span>
+            </div>
+            <p><input type="text" 
+            autocomplete="email"
+            type="email"
+            id="ContactForm-email"
+            class="field__input"
+            name="contact[email]"
+            spellcheck="false"
+            autocapitalize="off"
+            value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+            aria-required="true"
+            {% if form.errors contains 'email' %}
+              aria-invalid="true"
+              aria-describedby="ContactForm-email-error"
+            {% endif %}
+            >
+            <span class="conatct-emp-error error-field" style="display:none;">Email is Required!</span>
+            </p>
+            <div id="HASH">
+              <label for="yourname">Phone number</label>
+              <span class="required">(REQUIRED) </span>
+            </div>
+            <p><input type="text"
+            maxlength="13"
+            minlength="10"
+            onkeypress="return onlyNumberKey(event)"
+            id="ContactForm-phone"
+            class="field__input"
+            autocomplete="tel"
+            name="contact[{{ 'templates.contact.form.phone' | t }}]"
+            pattern="[0-9\-]*"
+            value="{% if form.phone %}{{ form.phone }}{% elsif customer %}{{ customer.phone }}{% endif %}"
+            >
+            <span class="phone-emp-error error-field" style="display:none;">Phone is Required!</span>
+            </p>
+
+            <div id="HASH">
+              <label for="yourname">What can we help you with? </label>
+              <span class="required">(REQUIRED) </span>
+            </div>
+
+            <select class="dropdown" id="country" name="contact[Query Type]">
+              <option value="" disabled selected>Select the reason</option>
+              <option value="Contact">Contact</option>
+              <option value="Career">Career</option>
+              <option value="Bulk Order">Bulk Order</option>
+            </select>
+            <span class="sel-emp-error error-field" style="display:none;">Please Select a value!</span>
+
+            <div id="HASH" style="margin-top:5%;">
+              <label for="yourname">What can we help you with? </label>
+              <span class="required">(REQUIRED) </span>
+            </div>
+            <p><textarea 
+                rows="10"
+                id="ContactForm-body"
+                class="text-area field__input"
+                name="contact[{{ 'templates.contact.form.comment' | t }}]"
+                 ></textarea>
+            <span class="content-emp-error error-field" style="display:none;">Message is Required!</span>
+            </p>
+
+            <div id="HASH">
+              <div class="note-icon">
+                <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <g clip-path="url(#clip0_796_6764)">
+                  <path d="M8.99577 14.6667C12.6777 14.6667 15.6624 11.6819 15.6624 8.00001C15.6624 4.31811 12.6777 1.33334 8.99577 1.33334C5.31387 1.33334 2.3291 4.31811 2.3291 8.00001C2.3291 11.6819 5.31387 14.6667 8.99577 14.6667Z" stroke="#797979" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M8.99609 10.6667V8" stroke="#797979" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M8.99609 5.33334H9.00276" stroke="#797979" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </g>
+                  <defs>
+                  <clipPath id="clip0_796_6764">
+                  <rect width="16" height="16" fill="white" transform="translate(0.996094)"/>
+                  </clipPath>
+                  </defs>
+                </svg>
+
+              </div>
+              <div class="note-context">
+                <span class="note"
+                  >{{ section.settings.contatc-note }}
+                </span>
+              </div>
+            </div>
+
+            <p><input type="submit" class="contact-submit" value="SUBMIT"></p>
+            {%- if form.posted_successfully? -%}
+            <h2 class="form-status form-status-list form__message" tabindex="-1" autofocus>
+              {% render 'icon-success' %}
+              {{ 'templates.contact.form.post_success' | t }}
+            </h2>
+          {%- elsif form.errors -%}
+            <div class="form__message">
+              <h2 class="form-status caption-large text-body" role="alert" tabindex="-1" autofocus>
+                {% render 'icon-error' %}
+                {{ 'templates.contact.form.error_heading' | t }}
+              </h2>
+            </div>
+            <ul class="form-status-list caption-large" role="list">
+              <li>
+                <a href="#ContactForm-email" class="link">
+                  {{ form.errors.translated_fields.email | capitalize }}
+                  {{ form.errors.messages.email }}
+                </a>
+              </li>
+            </ul>
+            {%- endif -%}
+          {% endform %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+{% comment %}
+<h2 class="contact-form-head" style="display:none;">{{ 'templates.contact.form.title' | t }}</h2>
+{%- form 'contact', id: 'ContactForm', class: 'isolate' -%}
+  {%- if form.posted_successfully? -%}
+    <h2 class="form-status form-status-list form__message" tabindex="-1" autofocus>
+      {% render 'icon-success' %}
+      {{ 'templates.contact.form.post_success' | t }}
+    </h2>
+  {%- elsif form.errors -%}
+    <div class="form__message">
+      <h2 class="form-status caption-large text-body" role="alert" tabindex="-1" autofocus>
+        {% render 'icon-error' %}
+        {{ 'templates.contact.form.error_heading' | t }}
+      </h2>
+    </div>
+    <ul class="form-status-list caption-large" role="list">
+      <li>
+        <a href="#ContactForm-email" class="link">
+          {{ form.errors.translated_fields.email | capitalize }}
+          {{ form.errors.messages.email }}
+        </a>
+      </li>
+    </ul>
+  {%- endif -%}
+  <div class="contact__fields">
+    <div class="field">
+      <input
+        class="field__input"
+        autocomplete="name"
+        type="text"
+        id="ContactForm-name"
+        name="contact[{{ 'templates.contact.form.name' | t }}]"
+        value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}"
+        placeholder="{{ 'templates.contact.form.name' | t }}"
+      >
+      <label class="field__label" for="ContactForm-name">{{ 'templates.contact.form.name' | t }}</label>
+    </div>
+    <div class="field field--with-error">
+      <input
+        autocomplete="email"
+        type="email"
+        id="ContactForm-email"
+        class="field__input"
+        name="contact[email]"
+        spellcheck="false"
+        autocapitalize="off"
+        value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+        aria-required="true"
+        {% if form.errors contains 'email' %}
+          aria-invalid="true"
+          aria-describedby="ContactForm-email-error"
+        {% endif %}
+        placeholder="{{ 'templates.contact.form.email' | t }}"
+      >
+      <label class="field__label" for="ContactForm-email">
+        {{- 'templates.contact.form.email' | t }}
+        <span aria-hidden="true">*</span></label
+      >
+      {%- if form.errors contains 'email' -%}
+        <small class="contact__field-error" id="ContactForm-email-error">
+          <span class="visually-hidden">{{ 'accessibility.error' | t }}</span>
+          <span class="form__message">
+            {%- render 'icon-error' -%}
+            {{- form.errors.translated_fields.email | capitalize }}
+            {{ form.errors.messages.email -}}
+          </span>
+        </small>
+      {%- endif -%}
+    </div>
+  </div>
+  <div class="field">
+    <input
+      type="tel"
+      id="ContactForm-phone"
+      class="field__input"
+      autocomplete="tel"
+      name="contact[{{ 'templates.contact.form.phone' | t }}]"
+      pattern="[0-9\-]*"
+      value="{% if form.phone %}{{ form.phone }}{% elsif customer %}{{ customer.phone }}{% endif %}"
+      placeholder="{{ 'templates.contact.form.phone' | t }}"
+    >
+    <label class="field__label" for="ContactForm-phone">{{ 'templates.contact.form.phone' | t }}</label>
+  </div>
+  <div class="field">
+    <textarea
+      rows="10"
+      id="ContactForm-body"
+      class="text-area field__input"
+      name="contact[{{ 'templates.contact.form.comment' | t }}]"
+      placeholder="{{ 'templates.contact.form.comment' | t }}"
+    >
+          {{- form.body -}}
+        </textarea>
+    <label class="form__label field__label" for="ContactForm-body">
+      {{- 'templates.contact.form.comment' | t -}}
+    </label>
+  </div>
+  <div class="contact__button">
+    <button type="submit" class="button">
+      {{ 'templates.contact.form.send' | t }}
+    </button>
+  </div>
+{%- endform -%}
+{% endcomment %}
+
+{% schema %}
+{
+  "name": "t:sections.contact-form.name",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "pge-title",
+      "default": "How can we help?",
+      "label": "Heading"
+    },
+    {
+      "type": "textarea",
+      "id": "sub-title",
+      "label": "Sub Heading"
+    },
+    {
+      "type" : "header",
+      "content" : "Address Block"
+    },
+    {
+      "id" : "adhead",
+      "type" : "text",
+      "label" : "Address Title",
+      "default" : "CORPORATE OFFICE"
+    },
+    {
+      "id": "add",
+      "type" : "textarea",
+      "label" : "Address"
+    },
+    {
+      "id" : "mapurl",
+      "type" : "text",
+      "label" : "Map Link"
+    },
+    {
+      "id" : "faq-link",
+      "type" : "url",
+      "label" : "Faq Page"
+    },
+    {
+      "id" : "contatc-note",
+      "type" : "textarea",
+      "label" : "Contact Note"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        {
+          "value": "h2",
+          "label": "t:sections.all.heading_size.options__1.label"
+        },
+        {
+          "value": "h1",
+          "label": "t:sections.all.heading_size.options__2.label"
+        },
+        {
+          "value": "h0",
+          "label": "t:sections.all.heading_size.options__3.label"
+        }
+      ],
+      "default": "h1",
+      "label": "t:sections.all.heading_size.label"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "t:sections.all.colors.accent_1.label"
+        },
+        {
+          "value": "accent-2",
+          "label": "t:sections.all.colors.accent_2.label"
+        },
+        {
+          "value": "background-1",
+          "label": "t:sections.all.colors.background_1.label"
+        },
+        {
+          "value": "background-2",
+          "label": "t:sections.all.colors.background_2.label"
+        },
+        {
+          "value": "inverse",
+          "label": "t:sections.all.colors.inverse.label"
+        }
+      ],
+      "default": "background-1",
+      "label": "t:sections.all.colors.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 36
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.contact-form.presets.name"
+    }
+  ]
+}
+{% endschema %}
+

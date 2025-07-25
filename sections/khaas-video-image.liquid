@@ -1,0 +1,115 @@
+<section class="khaas-video-image">
+  <div class="image-video-wrapper">
+    <div class="khaas--header">
+      <span>{{ section.settings.subheading }}</span>
+      <h2>{{ section.settings.heading }}</h2>
+      <p>{{ section.settings.content }}</p>
+    </div>
+    <div class="wrapper-vide-or-image">
+      {% if section.settings.videosrc != blank %}
+        <video poster="{{ section.settings.videoPoster | img_url:'1024x' }}">
+          <source src="{{ section.settings.videosrc }}" type="video/mp4">
+        </video>
+      {% else %}
+        <img src="{{ section.settings.videoPoster | img_url:'1024x' }}" alt="" width="100" height="100" loading="lazy">
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+.khaas--header {
+    max-width: 836px;
+    margin: auto;
+    text-align: center;
+    margin-bottom: 72px;
+}
+.image-video-wrapper {
+    max-width: 1246px;
+    margin: auto;
+    padding: 0 20px;
+}
+.khaas--header span {
+    font-size: 13px;
+    font-weight: 400;
+    font-style: italic;
+    line-height: 16px;
+    margin-bottom: 24px;
+    color: #231F20;
+    display: block;
+}
+.khaas--header h2 {
+    margin: 0;
+    font-size: 42px;
+    font-weight: 400;
+    line-height: 42px;
+}
+.khaas--header p {
+    font-size: 14px;
+    font-style: italic;
+    line-height: 22px;
+    color: #000;
+    opacity: 0.6;
+    padding: 0 24px;
+    margin: 24px 0 0;
+}
+section.khaas-video-image {
+    margin: 120px 0;
+    display: block;
+}
+.wrapper-vide-or-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 40px;
+}
+
+@media screen and (max-width: 600px){
+  .khaas--header h2 {
+    font-size: 28px;
+    line-height: 28px;
+  }
+  .khaas--header p {
+    margin: 24px 0 0;
+  }
+  section.khaas-video-image {
+    margin: 96px 0;
+  }
+}
+{% endstylesheet %}
+{% schema %}
+  {
+    "name": "Khaas Video And Image",
+    "settings": [
+      {
+        "type": "text",
+        "id": "subheading",
+        "label": "Sub heading"
+      },
+      {
+        "type": "textarea",
+        "id" : "heading",
+        "label": "Section Heading"
+      },
+      {
+        "type": "textarea",
+        "id" : "content",
+        "label": "Section Content"
+      },
+      {
+        "type": "image_picker",
+        "id": "videoPoster",
+        "label": "Image/Video Poster"
+      },
+      {
+        "type": "url",
+        "id": "videosrc",
+        "label": "Video Url"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Khaas Video And Image"
+      }
+    ]
+  }
+{% endschema %}

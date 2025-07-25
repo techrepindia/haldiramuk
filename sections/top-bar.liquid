@@ -1,0 +1,52 @@
+<div class="announcement-hr">
+  <marquee scrollamount="6">
+    <p class="bar-text">{{ section.settings.marquee }}</p>
+  </marquee>
+  <div class="top-links">
+    <div class="top-links-hr">
+      <a href="{{ section.settings.email }}"><span><i class="far fa-envelope"></i></span>{{ section.settings.email | remove: 'mailto:'}}</a>
+      <a href="{{ section.settings.bulk }}" class="bluk-query">{{ section.settings.bulk-lab }}</a>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Announcement Bar",
+    "settings": [
+      {
+        "id" : "marquee",
+        "type" : "text",
+        "label" : "Announcement bar message"
+      },
+      {
+        "id" : "email",
+        "type" : "url",
+        "label" : "Email"
+      },
+      {
+        "id" : "bulk",
+        "type" : "url",
+        "label" : "Top Link"
+      },
+      {
+        "id" : "bulk-lab",
+        "type" : "text",
+        "label" : "Top Link Label",
+        "default" : "Bulk Order"
+      }
+    ],
+    "presets" : [
+      {
+        "name" : "Announcement Bar",
+        "category" : "custom"
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

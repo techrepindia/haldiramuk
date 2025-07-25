@@ -1,0 +1,37 @@
+<section class="about-full-with-banner">
+  <picture>
+    <source srcset="{{ section.settings.d-img | img_url: '' }}" media="(min-width: 601px)">
+    <source srcset="{{ section.settings.m-img | img_url: '' }}" media="(max-width: 600px)">
+    <img src="{{ section.settings.d-img | img_url: '' }}" class="lazyload full-with-banner" loading="lazy">
+  </picture>
+</section>
+
+{% schema %}
+  {
+    "name": "Full Width Image",
+    "settings": [
+      {
+        "id" : "d-img",
+        "type" : "image_picker",
+        "label" : "Desktop Image"
+      },
+      {
+        "id" : "m-img",
+        "type" : "image_picker",
+        "label" : "Mobile Image"
+      }
+    ],
+    "presets" : [
+      {
+        "name" : "Full Width Image",
+        "category" : "custom"
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

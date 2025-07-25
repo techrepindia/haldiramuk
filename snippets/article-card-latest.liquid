@@ -1,0 +1,14 @@
+<div class="article-latest-card">
+  <a href="{{ article.url }}">
+    <img src="{{ article.image | img_url: '354x268' }}" alt="{{ article.title }}" width="354" height="268" loading="lazy">
+  </a>
+  <div class="article-contetn-plate">
+    <a href="{{ article.url }}">{{ article.title }}</a>
+    <div class="sharable-article-skin">
+      {% assign share_url = request.origin | append: article.url %}
+      {% render 'share-button', share_link: share_url %}
+      <a href="{{ article.url }}" class="article-more">Read More<span><i class="fal fa-arrow-right"></i></span></a>
+    </div>
+  </div>
+  
+</div>

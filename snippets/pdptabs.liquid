@@ -1,0 +1,154 @@
+<style>
+  .tab {
+      overflow: hidden;
+      display: flex;
+      border-bottom: 2px solid rgb(205 153 81);
+      width: 100%;
+  }
+
+  .tab button {
+      background-color: inherit;
+      float: left;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      transition: 0.3s;
+      width: max-content;
+      font-family: 'Coconat';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 14px;
+      padding: 0 10px 10px 10px;
+      line-height: 120%;
+      text-align: left;
+      color: #161616;
+      margin-right: 50px;
+      text-transform: uppercase;
+  }
+
+  /* Create an active/current tablink class */
+  .tab button.active {
+      border-bottom: 3px solid rgb(205 153 81);
+  }
+
+  /* Style the tab content */
+  .tabcontent {
+    display: none;
+    padding: 6px 12px;
+    width: 100%;
+  }
+    .p-spec{
+      font-size: 14px !important;
+      font-family: 'Satoshi' !important;
+    }
+    tr td .p-spec{
+      font-size: 16px !important;
+      font-family: 'Coconat' !important;
+    }
+    .tabcontent table tbody tr td {
+      border: none;
+      padding: 0;
+      font-family: 'Coconat';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 150%;
+      text-align: left;
+      color: #161616;
+      letter-spacing: 0;width: 100%;
+  }
+    .tabcontent table {
+      box-shadow: none;
+  }
+    span.labell {
+      display: block;
+      font-size: 16px;
+      font-family: 'Coconat';
+      margin-bottom: 9px;
+  }
+    .tworow{
+      padding-bottom: 20px !important;
+      line-height: 20px !important;
+  }
+  .skuu {
+      width: 150px !important;
+      display: block;
+      text-align: right !important;
+  }
+</style>
+
+<div class="tab">
+  {% unless product.metafields.custom.product_ingredients == blank %}
+    <button class="tablinks" onclick="openCity(event, 'Ingredients')" id="defaultOpen">Ingredients</button>
+  {% endunless %}
+  {% unless product.metafields.custom.short_description == blank and product.metafields.custom.pack_size == blank and product.metafields.custom.shell_life == blank %}
+    <button {% if product.metafields.custom.product_ingredients == blank %}id="defaultOpen"{% endif %} class="tablinks" onclick="openCity(event, 'Specifications')">Specifications</button>
+  {% endunless %}
+</div>
+
+<div id="Ingredients" class="tabcontent ingredients-hr">
+  <p>{{ product.metafields.custom.product_ingredients }}</p>
+</div>
+
+{% unless product.metafields.custom.short_description == blank and product.metafields.custom.pack_size == blank and product.metafields.custom.shell_life == blank %}
+<div id="Specifications" class="tabcontent">
+  <table>
+    <tbody>
+      <tr>
+        <td>Product Details</td>
+        <td class="skuu">
+          {% if product.selected_or_first_available_variant.sku != blank -%}
+            SKU {{ product.selected_or_first_available_variant.sku -}}
+          {%- endif %}
+        </td>
+      </tr>
+      <tr>
+        <!-- <td class="p-spec" colspan="2">{{ product.metafields.custom.short_description | strip_html }}</td> -->
+        <!-- <td class="p-spec" colspan="2">{{ product.metafields.custom.short_description }}</td> -->
+      </tr>
+    <tr>
+  <td class="p-spec" colspan="2">
+    {% assign short_desc = product.metafields.custom.short_description %}
+    {% if short_desc contains '<' and short_desc contains '>' %}
+      {{ short_desc }}
+    {% else %}
+      {{ short_desc | newline_to_br }}
+    {% endif %}
+  </td>
+</tr>
+      <tr>
+        {% if product.metafields.custom.pack_size != blank %}
+          <td class="tworow">
+            <span class="labell">Pack Size</span>
+            <span>{{ product.metafields.custom.pack_size }}</span>
+          </td>
+        {% endif %}
+        {% if product.metafields.custom.shell_life != blank %}
+          <td class="tworow">
+            <span class="labell">Shelf Life</span>
+            <span>{{ product.metafields.custom.shell_life }}</span>
+          </td>
+        {% endif %}
+      </tr>
+    </tbody>
+  </table>
+</div>
+{% endunless %}
+<script>
+  function openCity(evt, cityName) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(cityName).style.display = "block";
+    evt.currentTarget.className += " active";
+  }
+
+  // Get the element with id="defaultOpen" and click on it
+  document.getElementById("defaultOpen").click();
+</script>

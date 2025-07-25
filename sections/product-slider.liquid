@@ -1,0 +1,80 @@
+<section style="background-color: {{ section.settings.bg-col }}" class="product-slider-picks {{ section.settings.custom-class }}">
+  <div class="slider-pr-wrapper">
+  <div class="slider-wrapper-hr">
+      <div class="slider-header">
+    <div class="slider-header-content">
+      <h3>{{ section.settings.head }}</h3>
+      <p>{{ section.settings.sub-text }}</p>
+    </div>
+<!--     <div class="view-btn-wrapper"><a href="{{ section.settings.viewul }}">{{ section.settings.viewbtn }}<span><i class="fal fa-arrow-right" style="color: #ffffff;"></i></span></a></div> -->
+  </div>
+    <div class="{% if template.name == 'product' %}recommendation-product {% else %}hr-slider-items{% endif %}">
+      {% assign collection = section.settings.col %}
+      {% for pr-item in collection.products %}
+        {% if pr-item.available %}
+      <div class="hr-pr-slide">{% include 'product-item' %}</div>
+          {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+  </div>
+</section>
+
+
+{% schema %}
+  {
+    "name": "Product Slider",
+    "settings": [
+      {
+        "id" : "bg-col",
+        "type" : "color",
+        "label" : "Section Background-color",
+        "default" : "#ffffff"
+      },
+      {
+        "id" : "head",
+        "type" : "text",
+        "label" : "Title",
+        "default" : "Popular Picks"
+      },
+      {
+        "id" : "sub-text",
+        "type": "textarea",
+        "label" : "Sub Heading"
+      },
+      {
+        "id" : "viewul",
+        "type": "url",
+        "label" : "View Url"
+      },
+      {
+        "id" : "viewbtn",
+        "type" : "text",
+        "label" : "Button Label",
+        "default" : "View All"
+      },
+      {
+        "id" : "col",
+        "type" : "collection",
+        "label" : "Collection"
+      },
+      {
+        "id" : "custom-class",
+        "type" : "text",
+        "label" : "section Class"
+      }
+    ],
+    "presets" : [
+      {
+        "name" : "Product Slider",
+        "category" : "custom"
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

@@ -1,0 +1,147 @@
+<section class="milestone-presence">
+  <hr class="milestone-devider">
+  <div class="milestone-wrapper milestone-origins">
+<style>
+.boxed-tabs .tab {
+    overflow: hidden;
+    background-color: transparent;
+    border-bottom: 1px solid #eeeeee;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* Style the buttons inside the tab */
+.boxed-tabs .tab button {
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 17px;
+    border-bottom: 5px solid transparent;
+    padding-bottom: 5px;
+    background: transparent;
+    font-family: 'Coconat';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 120%;
+    color: #FFFFFF;
+    margin: 0 30px;
+}
+
+  .boxed-tabs .tabcontent p {
+    color: #fff;
+    line-height: 3.5rem;
+    font-size: 19px;
+}
+  
+/* Change background color of buttons on hover */
+.boxed-tabs .tab button:hover {
+border-bottom: 5px solid #fff;
+}
+
+/* Create an active/current tablink class */
+.boxed-tabs .tab button.active {
+    border-bottom: 5px solid #fff;
+}
+
+/* Style the tab content */
+.boxed-tabs .tabcontent {
+    display: none;
+    padding: 16px 24px;
+    border-top: none;
+}
+
+.boxed-tabs {
+  max-width: 1566px;
+  margin: auto;
+  width: 80%;
+}
+</style>
+    <div class="boxed-tabs">
+      <div class="tab">
+        {% for block in section.blocks %}
+          {% if block.type == 'button' %}
+            <button class="tablinks{% if block.settings.idd == 'Milestone' %} adtab{% endif %}" onclick="openCity(event, '{{ block.settings.idd }}')" {% if forloop.index == 1 %}id="defaultOpen"{% endif %}>{{ block.settings.idd }}</button>
+          {% endif %}
+        {% endfor %}
+      </div>
+
+      {% for block in section.blocks %}
+        {% if block.type == 'tab' %}
+          <div id="{{ block.settings.iddd }}" class="tabcontent">
+            <p>{{ block.settings.content }}</p>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Haldirams Milestone",
+  "settings": [],
+  "blocks" : [
+    {
+      "name" : "Milestone Button",
+      "type" : "button",
+      "settings" : [
+        {
+          "id" : "idd",
+          "type" : "text",
+          "label" : "Id"
+        }
+      ]
+    },
+    {
+      "name" : "Milestone",
+      "type" : "tab",
+      "settings" : [
+        {
+          "id" : "iddd",
+          "type" : "text",
+          "label" : "Id"
+        },
+        {
+          "id" : "content",
+          "type" : "textarea",
+          "label" : "Content"
+        }
+      ]
+    }
+  ],
+  "presets" : [
+    {
+      "name" : "Haldirams Milestone",
+      "category" : "custom"
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
+<script>
+  function openCity(evt, cityName) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(cityName).style.display = "block";
+    evt.currentTarget.className += " active";
+  }
+
+  // Get the element with id="defaultOpen" and click on it
+  document.getElementById("defaultOpen").click();
+</script>

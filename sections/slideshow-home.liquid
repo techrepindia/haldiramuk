@@ -1,0 +1,89 @@
+<section class="homepage-slide">
+  <div class="slider-banner">
+    {% for block in section.blocks %}
+    <div class="slide-container-slide">
+      <a href="{% if block.settings.link != blank %}{{ block.settings.link }}{% else %}javascript:void(0);{% endif %}">
+      {% if block.settings.img-d != blank %}
+      <picture>
+        {% if block.settings.img-m != blank %}
+          <source srcset="{{ block.settings.img-d | img_url:'' }}" media="(min-width:601px)">
+          <source srcset="{{ block.settings.img-m | img_url:'' }}" media="(max-width:600px)">
+        {% endif %}
+          <img src="{{ block.settings.img-d | img_url:'' }}" width="100%" alt="slideshow">
+      </picture>
+      {% else %}
+        <img src="{{ section.settings.def-img | img_url:'' }}" alt="Homepage Banner Slide" class="lazyload">
+      {% endif %}
+      </a>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+<script>
+$(document).ready(function(){
+  $('.slider-banner').slick({
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: {% if section.settings.autoplay %}true{% else %}false{% endif %},
+    arrows: true,
+    dots: false,
+    autoplaySpeed: 2000
+  });
+});
+
+
+</script>
+
+
+{% schema %}
+  {
+    "name": "Homepage Slide",
+    "settings": [
+      {
+        "id" : "def-img",
+        "type" : "image_picker",
+        "label" : "Default Image"
+      },
+      {
+        "id" : "autoplay",
+        "type" : "checkbox",
+        "label" : "Autoplay Slides"
+      }
+    ],
+    "blocks" : [
+      {
+        "name" : "HomePage SLideshow",
+        "type" : "Slider",
+        "settings" : [
+          {
+            "id" : "img-d",
+            "type" : "image_picker",
+            "label" : "Desktop Slide"
+          },
+          {
+            "id" : "img-m",
+            "type" : "image_picker",
+            "label" : "Mobile Slide"
+          },
+          {
+            "id" : "link",
+            "type" : "url",
+            "label" : "Slide Link"
+          }
+        ]
+      }
+    ],
+    "presets" : [
+      {
+        "name" : "Homepage Slides",
+        "category" : "custom"
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

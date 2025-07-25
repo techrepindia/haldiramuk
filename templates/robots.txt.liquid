@@ -1,0 +1,50 @@
+User-agent: *
+Disallow: /admin
+Disallow: /cart
+Disallow: /checkout
+Disallow: /checkouts
+Disallow: /orders
+Disallow: /carts
+Disallow: /account
+Disallow: /search
+Disallow: /policies/
+Disallow: /a/downloads/-/*
+Disallow: /apple-app-site-association
+Disallow: /.well-known/shopify/monorail
+Disallow: /cdn/wpm/*.js
+Disallow: /recommendations/products
+Disallow: /*/recommendations/products
+Disallow: /*preview_theme_id*
+Disallow: /*preview_script_id*
+Disallow: /*?*oseid=*
+Disallow: /*sort_by*
+Disallow: /*+*
+Disallow: /*%2B*
+Disallow: */collections/*filter*&amp;*filter*
+Disallow: /*/*?*ls=*&amp;ls=*
+Disallow: /*/*?*ls%3D*%3Fls%3D*
+Disallow: /*/*?*ls%3d*%3fls%3d*
+Sitemap: https://www.haldiramuk.com/sitemap.xml
+# Google Adsbot (must be declared separately)
+User-agent: adsbot-google
+Disallow: /checkout
+Disallow: /checkouts
+Disallow: /orders
+Disallow: /carts
+Disallow: /*?*oseid=*
+Disallow: /*preview_theme_id*
+Disallow: /*preview_script_id*
+Disallow: /cdn/wpm/*.js
+# Disallow aggressive bots (Ahrefs, MJ12, etc.)
+
+User-agent: AhrefsBot
+User-agent: AhrefsSiteAudit
+User-agent: MJ12bot
+Crawl-delay: 10
+Disallow: /
+# Block open-source scrapers
+User-agent: Nutch
+Disallow: /
+# Pinterest crawling delay (for server protection)
+User-agent: Pinterest
+Crawl-delay: 1

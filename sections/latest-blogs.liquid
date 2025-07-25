@@ -1,0 +1,117 @@
+{{ 'latest-blogs.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'share.js' | asset_url }}" defer="defer"></script>
+<section class="latest-blogs-hr">
+  <div class="latest-blogs-container">
+    <div class="blog-header-hr">
+      <div class="header-block-container">
+        <h2>{{ section.settings.head }}</h2>
+        <p>{{ section.settings.subhead }}</p>
+      </div>
+      <a href="{{ section.settings.view-all }}" class="view-all-btn-blogs">
+        {{- section.settings['btn-label'] }}
+        <span><i class="fal fa-arrow-right"></i></span
+      ></a>
+    </div>
+    {% assign blog = section.settings.blog-id %}
+    <div class="grid-wrap-scroll">
+      <div class="blog-latest-grid" data-slides="{% if blog.articles_count <= 4 %}{{ blog.articles_count }}{% else %}4{% endif %}">
+        {%- for article in blog.articles -%}
+          {%- render 'article-card-latest', article: article -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+    $(document).ready(function(){
+    var slideLen = $('body').find('.latest-blogs-hr .blog-latest-grid').attr('data-slides');
+      $('.blog-latest-grid').slick({
+    infinite: false,
+    slidesToShow: slideLen,
+    slidesToScroll: 1,
+    arrows: false,
+      responsive: [
+      {
+        breakpoint: 1025,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 2,
+          infinite: false,
+          dots: false
+        }
+      },
+        {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 2
+        }
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2.2,
+          slidesToScroll: 2
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1.1,
+          slidesToScroll: 1
+        }
+      }
+      // You can unslick at a given breakpoint now by adding:
+      // settings: "unslick"
+      // instead of a settings object
+    ]
+  });
+    });
+</script>
+
+{% schema %}
+{
+  "name": "Latest Blog",
+  "settings": [
+    {
+      "id" : "head",
+      "type" : "text",
+      "label" : "Heading"
+    },
+    {
+      "id" : "subhead",
+      "type" : "textarea",
+      "label" : "Sub Heading"
+    },
+    {
+      "id" : "view-all",
+      "type" : "url",
+      "label" : "Button Link"
+    },
+    {
+      "id" : "btn-label",
+      "type" : "text",
+      "label" : "Button Label",
+      "default" : "View All"
+    },
+    {
+      "id" : "blog-id",
+      "type" : "blog",
+      "label" : "Select blog category"
+    }
+  ],
+  "presets" : [
+    {
+      "name" : "Latest Blog",
+      "category" : "custom"
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

@@ -1,0 +1,67 @@
+<section style="background-color: {{ section.settings.bg-col }}" class="product-slider-picks {{ section.settings.custom-class }}">
+  <div class="slider-pr-wrapper">
+  <div class="slider-header">
+    <div class="slider-header-content">
+      <h3>{{ section.settings.head }}</h3>
+      <p>{{ section.settings.sub-text }}</p>
+    </div>
+  </div>
+  <div class="slider-wrapper-hr">
+    
+    <div class="{% if template.name == 'product' %}recommendation-product {% else %}hr-slider-items{% endif %}">
+      {% for collection in product.collections %}{% assign new = collection %}{% endfor %}
+      {% for producte in new.products %}
+        {% if producte.available %}
+        {% unless producte.handle == product.handle %}
+          <div class="hr-pr-slide">{% include 'product-item', pr-item:producte %}</div>
+        {% endunless %}
+        {% endif %}
+      {% endfor %}
+ 
+    </div>
+  </div>
+  </div>
+</section>
+
+
+{% schema %}
+  {
+    "name": "You May Also Like",
+    "settings": [
+      {
+        "id" : "bg-col",
+        "type" : "color",
+        "label" : "Section Background-color",
+        "default" : "#ffffff"
+      },
+      {
+        "id" : "head",
+        "type" : "text",
+        "label" : "Title",
+        "default" : "Popular Picks"
+      },
+      {
+        "id" : "sub-text",
+        "type": "textarea",
+        "label" : "Sub Heading"
+      },
+      {
+        "id" : "custom-class",
+        "type" : "text",
+        "label" : "section Class"
+      }
+    ],
+    "presets" : [
+      {
+        "name" : "You May Also Like",
+        "category" : "custom"
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

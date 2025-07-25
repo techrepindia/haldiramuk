@@ -1,0 +1,94 @@
+<section class="offer-page">
+  <div class="offer-page-headerr">
+    <div class="offer-title-container">
+      <span>{% render 'icon-circle' %}</span>
+      <h1 class="page-head">{{ page.title | upcase }}</h1>
+      <span>{% render 'icon-circle' %}</span>
+    </div>
+    <p class="subhead-offer">{{ section.settings.subhead }}</p>
+  </div>
+  <div class="offer-boxed-section">
+    <div class="ad-wrapper-offers">
+      {% for block in section.blocks %}
+        <div class="ad-item {{ block.settings.dimension }}">
+          <a href="{% if block.settings.ad_link != blank %}{{ block.settings.ad_link }}{% else %}javascript:void(0);{% endif %}">
+            <picture>
+              {% if block.settings.m-img != blank %}
+                <source srcset="{{ block.settings.m-img | img_url: '' }}" media="(max-width: 600px)">
+                <source srcset="{{ block.settings.d-img | img_url: '' }}" media="(min-width: 601px)">
+              {% endif %}
+              <img src="{{ block.settings.d-img | img_url: '' }}" alt="Add banner">
+            </picture>
+          </a>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+
+
+{% schema %}
+  {
+    "name": "Offer Page",
+    "settings": [
+      {
+        "id" : "subhead",
+        "type" : "text",
+        "label" : "Sub Heading"
+      }
+    ],
+    "blocks" : [
+      {
+        "name" : "Add Banner",
+        "type" : "image",
+        "settings" : [
+          {
+            "id" : "dimension",
+            "type" : "select",
+            "options": [
+              {
+                "value": "half",
+                "label": "Half Width"
+              },
+              {
+                "value": "full",
+                "label": "Full Width"
+              }
+            ],
+            "label" : "Box Size",
+            "default": "full",
+            "info": "Choose this to set item size."
+          },
+          {
+            "id" : "ad_link",
+            "type" : "url",
+            "label" : "Banner Link"
+          },
+          {
+            "id" : "d-img",
+            "type" : "image_picker",
+            "label" : "Ad Banner(web)"
+          },
+          {
+            "id" : "m-img",
+            "type" : "image_picker",
+            "label" : "Ad Banner(Mobile)"
+          }
+        ]
+      }
+    ],
+    "presets" : [
+      {
+        "name" : "Offer Page",
+        "category" : "custom"
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

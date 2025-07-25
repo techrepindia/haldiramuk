@@ -1,0 +1,40 @@
+<section class="the-vison-hr">
+  <div class="vision-wrapper">
+    <div class="section-heading">
+      <h2>{{ section.settings.head }}</h2>
+    </div>
+    <div class="vision-content">
+      <p>{{ section.settings.content }}</p>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+  {
+    "name": "The Vision",
+    "settings": [
+      {
+        "id" : "head",
+        "type" : "text",
+        "label" : "Section Heading"
+      },
+      {
+        "id" : "content",
+        "type" : "textarea",
+        "label" : "Vision Content"
+      }
+    ],
+    "presets" : [
+      {
+        "name" : "The Vision",
+        "category" : "custom"
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

@@ -1,0 +1,503 @@
+<link rel="preload" href="{{ 'khaas-bundle.js' | asset_url }}" as="script" />
+{{ 'khaas-bundle.js' | asset_url | script_tag }}
+
+{% assign pack_of_six = section.settings.pack_six %}
+{% assign pack_of_nine = section.settings.pack_nine %}
+{% assign pack_of_sixteen = section.settings.pack_sixteen %}
+<section class="khaas-collection-bundle">
+  <div class="collection-bundle-wrapper">
+    <div class="bundle-khaas-header">
+      <h1>{{ section.settings.heading }}</h1>
+      <p>{{ section.settings.content }}</p>
+    </div>
+    <div class="bundle-khaas-main">
+      <div class="bundle-filters">
+        <!-- <fieldset>
+          <input type="radio" name="bundle" id="all" value="all" checked/>
+          <label>All</label>
+        </fieldset> -->
+        <fieldset>
+          <input type="radio" data-pack-price="{{ pack_of_six.price | money }}" name="bundle" id="pack_of_6" value="6" data-product-id="{{ pack_of_six.selected_or_first_available_variant.id }}" checked/>
+          <label>Pack Of 6</label>
+        </fieldset>
+        <fieldset>
+          <input type="radio" data-pack-price="{{ pack_of_nine.price | money }}" name="bundle" id="pack_of_9" value="9" data-product-id="{{ pack_of_nine.selected_or_first_available_variant.id }}" />
+          <label>Pack of 9</label>
+        </fieldset>
+        <fieldset>
+          <input type="radio" data-pack-price="{{ pack_of_sixteen.price | money }}" name="bundle" id="pack_of_16" value="16" data-product-id="{{ pack_of_sixteen.selected_or_first_available_variant.id }}"/>
+          <label>Pack of 16</label>
+        </fieldset>
+      </div>
+      <div class="filter-mainproducts">
+        
+        {% if pack_of_six != blank %}
+          <div class="pack_of_6 grid-block-tab active" data-tab="pack_of_6">
+            <div class="imagePack">
+              <img src="{{ pack_of_six | image_url: width: '400' }}" width="100" height="100" alt="">
+            </div>
+            <div class="pack-detail-six">
+              <div class="detail-pack-inner pr-new-container">
+                <span>{{ collection.title }}</span>
+                <h4 class="pr-title-hr">{{ pack_of_six.title }}</h4>
+                <p>Included in the box:</p>
+                <ul>
+                  {% assign bundleList = pack_of_six.metafields.custom.bundle_items %}
+                  {% for bundleitem in bundleList.value %}
+                  <li>~ <p><span class="prname">{{ bundleitem.bundle_item_name }}</span> x <span class="sizebun">1</span></p></li>
+                  {% endfor %}
+                </ul>
+                <div class="bundle-card-action">
+                <!-- bundle action -->
+                <button type="button" class="action-bundle" data-product="{{ pack_of_six.id }}" data-variant-id="{{ bundleList.bundle_item_name }}" {% unless pack_of_six.available %}disabled{% endunless %}>Add +</button>
+                <div class="bundle-quantity-helper">
+                  <div class="quantity--holder">
+                    <button type="button" class="minus-quantiy">-</button>
+                    <input type="text" class="bundlequantiy" value="0" name="bundle_quanity" readonly>
+                    <button type="button" class="plus-quantiy">+</button>
+                  </div>
+                </div>
+              </div>
+              </div>
+            </div>
+          </div>
+        {% endif %}
+        {% if pack_of_nine != blank %}
+          <ul role="list" class="pack_of_9 grid-block-tab" data-tab="pack_of_9">
+            {% assign bundleList = pack_of_nine.metafields.custom.bundle_items %}
+            {% for bundleitem in bundleList.value %}
+              <li>{% render 'bundle-card-item',product: bundleitem,bundle:pack_of_nine %}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+        {% if pack_of_sixteen != blank %}
+          <ul role="list" class="pack_of_16 grid-block-tab" data-tab="pack_of_16">
+            {% assign bundleList = pack_of_nine.metafields.custom.bundle_items %}
+            {% for bundleitem in bundleList.value %}
+              {% render 'bundle-card-item',product: bundleitem, bundle:pack_of_sixteen %}
+            {% endfor %}
+          </ul>
+        {% endif %}
+        
+      </div>
+    </div>
+  </div>
+
+
+<div class="bundlecart-strip" id="bundlecart">
+  <div class="bundleproducts">
+    <h2>Bundle Products</h2>
+    <div class="bundleprods"></div>
+  </div>
+  <div class="bundle-action">
+    <p class="bundle--price">{{ pack_of_six.price | money }}</p>
+    <button type="button" class="add-to-bundle" data-cart-id="{{ pack_of_six.selected_or_first_available_variant.id }}" disabled>ADD TO CART</button>
+  </div>
+</div>
+</section>
+
+
+
+{% stylesheet %}
+.bundle-action {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    color: #FFF;
+}
+.grid-block-tab{
+  display: none;
+}
+.imagePack img {
+    width: 100%;
+    height: auto;
+}
+.pack-detail-six .bundle-card-action {
+    margin-top: 30px;
+}
+.detail-pack-inner.pr-new-container ul li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.pack_of_6.grid-block-tab {
+    max-width: 900px;
+    margin: auto;
+    grid-template-columns: repeat(2, 1fr);
+    padding: 40px 20px;
+    gap: 30px;
+}
+.grid-block-tab.active{
+  display: grid;
+}
+.detail-pack-inner.pr-new-container p {
+    font-size: 16px;
+    font-style: italic;
+    letter-spacing: 1px;
+    margin: 0;
+}
+
+.detail-pack-inner.pr-new-container ul {
+    margin: 20px 0 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+
+.grid-block-tab{
+  display: none;
+}
+.bundle-khaas-header {
+    max-width: 840px;
+    margin: auto;
+    text-align: center;
+}
+
+.collection-bundle-wrapper {
+    max-width: 1298px;
+    margin: auto;
+}
+section.khaas-collection-bundle {
+    padding: 29px 20px 0;
+}
+.bundle-khaas-header h2,.bundle-khaas-header h1 {
+    font-size: 42px;
+    line-height: 42px;
+    margin: 0;
+    color: #231F20;
+}
+.bundle-khaas-header p {
+    color: #000000;
+    font-size: 14px;
+    line-height: 22.4px;
+    font-style: italic;
+    opacity: .6;
+}
+.bundle-filters {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+    border-bottom: 1px solid hwb(0deg 0% 100% / 40%);
+    padding-bottom: 36px;
+}
+.bundle-filters:after {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 0;
+    right: 0;
+    opacity: 1;
+    bottom: -8.5px;
+    position: absolute;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-left: 8px solid transparent;
+    border-top: 8px solid #aaaaaa;
+    transform: rotate(90deg);
+}
+ 
+.bundle-filters:before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 0;
+    left: 0;
+    opacity: 1;
+    bottom: -8.5px;
+    position: absolute;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-left: 8px solid transparent;
+    border-top: 8px solid #aaaaaa;
+    transform: rotate(-90deg);
+}
+
+  
+.bundle-filters fieldset {
+    border: none;
+    position: relative;
+    padding: 0;
+    margin: 0;
+}
+.bundle-filters input {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    opacity: 0;
+    z-index: 2;
+}
+.bundle-filters fieldset label {
+    padding: 0 24px 10px;
+    font-size: 14px;
+    text-transform: uppercase;
+    color: #000;
+    opacity: .7;
+    letter-spacing: 2px;
+    font-weight: 400;
+}
+.bundle-filters fieldset:not(:last-child):after {
+    content: "|";
+    color: #000;
+    opacity: 0.7;
+}
+.bundle-filters input:checked+label {
+    color: #D84616;
+    font-weight: 700;
+    opacity: 1;
+    text-decoration: underline;
+    text-underline-offset: 10px;
+    text-decoration-thickness: 2px;
+}
+
+.filter-mainproducts ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 24px 0 0;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 20px;
+    row-gap: 48px;
+}
+
+.bundle-card-media img {
+    width: 100%;
+    height: auto;
+}
+
+.bundle-content-desc h3 {
+    margin: 0;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #231F20;
+    line-height: 24px;
+}
+
+.bundle-content-desc {
+    margin: 18px 0 0 0;
+}
+.price-and-action {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 18px;
+}
+.price-and-action .wishlist-engine {
+    position: unset;
+}
+
+.action-bundle {
+    padding: 4px 25px;
+    width: max-content;
+    background: #d84616;
+    height: 40px;
+    border-radius: 4px;
+    line-height: 100%;
+    font-size: 14px;
+    border: none;
+    font-family: Coconat;
+    color: #FFF;
+    font-weight: 600;
+    cursor: pointer;
+}
+input.bundlequantiy {
+    text-align: center;
+    background: transparent;
+    border: none;
+    height: 40px;
+    color: #fff;
+    width: 30px;
+}
+.quantity--holder {
+    width: 90px;
+    right: 0;
+    background: #d84616 !important;
+    border-radius: 4px;
+    display: flex;
+}
+.quantity--holder button {
+    padding: 1px 6px;
+    width: 30px;
+    height: 40px;
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-size: 18px;
+    cursor: pointer;
+}
+.bundle-quantity-helper {
+    display: none;
+}
+.bundle-card-action {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.price-wrap {
+    display: flex;
+    align-items: center;
+}
+.bundle-card-action .wishlist-engine {
+    width: 40px;
+    height: 40px;
+    border: 1px solid #9226371A;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.bundle-card-action .wishlist-engine-button {
+    padding: 0 !important;
+    line-height: 50px !important;
+}
+button.action-bundle[disabled] {
+    opacity: .5;
+    cursor: no-drop;
+}
+.bundlecart-strip {
+    width: 100%;
+    opacity: 0;
+    visibility: hidden;
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
+    bottom: -100px;
+    left: 0;
+    padding: 10px 30px;
+    margin: auto;
+    right: 0;
+    background: #d84616;
+    z-index: 2;
+    height: 80px;
+    align-items: center;
+    transition: .3s ease;
+}
+button.add-to-bundle {
+    border: none;
+    font-size: 14px;
+    font-family: 'Coconat';
+    display: flex;
+    background: #FFF;
+    cursor: pointer;
+    height: 40px;
+    justify-content: center;
+    align-items: center;
+    padding: 0 30px;
+    border-radius: 4px;
+  width: max-content;
+}
+.bundleproducts h2 {
+    color: #FFF;
+    font-size: 19px;
+    line-height: 100%;
+    margin: 0;
+}
+.bundleproducts {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.active-bundleCart{
+  opacity: 1;
+  visibility: visible;
+  bottom: 0;
+}
+.bundleprods p {
+    margin: 0;
+    color: #FFF;
+    letter-spacing: 1px;
+    font-size: 12px;
+    font-family: 'Coconat';
+    text-transform: uppercase;
+}
+.bundleprods {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    row-gap: 0;
+}
+.bundleprods p:not(:last-child):after {
+    content: ",";
+    padding: 0 4px;
+}
+button.plus-quantiy[disabled] {
+    opacity: 0.6;cusrsor: no-drop;
+}
+
+
+@media screen and (max-width: 600px){
+  .filter-mainproducts ul {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .bundle-filters {
+    flex-wrap: wrap;
+    row-gap: 10px;
+    padding-bottom: 20px;
+  }
+  .bundle-khaas-header h2, .bundle-khaas-header h1 {
+    font-size: 28px;
+  }
+  .pack_of_6.grid-block-tab {
+    grid-template-columns: repeat(1, 1fr);
+    padding: 40px 0px;
+  }
+  .active-bundleCart {
+    opacity: 1;
+    visibility: visible;
+    bottom: 70px;
+    height: auto;
+    flex-wrap: wrap;
+    padding: 20px 20px;
+  }
+  .bundle-action {
+    width: 100%;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+}
+@media screen and (max-width: 480px){
+  .filter-mainproducts ul {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+{% endstylesheet %}
+
+{% schema %}
+  {
+    "name": "Khaas Collection Bundle",
+    "settings": [
+      {
+        "type": "text",
+        "id": "heading",
+        "label": "Section Heading"
+      },
+      {
+        "type": "textarea",
+        "id": "content",
+        "label": "Section SubHeading"
+      },
+      {
+        "type": "product",
+        "id": "pack_six",
+        "label": "Pack Of 6 Product"
+      },
+      {
+        "type": "product",
+        "id": "pack_nine",
+        "label": "Pack Of 9 Product"
+      },
+      {
+        "type": "product",
+        "id": "pack_sixteen",
+        "label": "Pack Of 16 Product"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Khaas Collection Bundle"
+      }
+    ]
+  }
+{% endschema %}

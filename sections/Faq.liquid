@@ -1,0 +1,87 @@
+<section class="faq-page-wrapper">
+  {% if section.settings.d-img != blank %}
+  <div class="faq-header-container">
+    <picture>
+      <source srcset="{{ section.settings.m-img | img_url:'' }}" media="(max-width:600px)">
+      <source srcset="{{ section.settings.d-img | img_url:'' }}" media="(min-width:601px)">
+      <img src="{{ section.settings.d-img | img_url:'' }}" class="lazyload page-banner-faq" loading="lazy">
+    </picture>
+    <div class="page-title-faq">
+      <h1>{{ page.title | upcase }}</h1>
+    </div>
+  </div>
+  {% else %}
+  <div class="secondary-page-header">
+    <h1>{{ page.title | upcase }}</h1>
+    <div>{% render 'separator' %}</div>
+  </div>
+  {% endif %}
+  <div class="faq-main-block">
+    {% for block in section.blocks %}
+      <div class="faq-repeater-block">
+        {% if block.settings.block-head != blank %}
+          <h3>{{ block.settings.block-head }}</h3>
+        {% endif %}
+        <div class="hr-question{% if forloop.index == 1 %} active-ques{% endif %}">
+          <h6>{{ block.settings.faq-ques }}</h6>
+        </div>
+        <div class="hr-answer" {% if forloop.index == 1 %}style="display: block;"{% endif %}>
+          <p>{{ block.settings.faq-answer }}</p>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+  {
+    "name": "FAQ",
+    "settings": [
+      {
+        "id" : "d-img",
+        "type" : "image_picker",
+        "label" : "Desktop Banner"
+      },
+      {
+        "id" : "m-img",
+        "type" : "image_picker",
+        "label" : "Mobile Banner"
+      }
+    ],
+    "blocks" : [
+      {
+        "name" : "Faq",
+        "type" : "text",
+        "settings" : [
+          {
+            "id" : "block-head",
+            "type" : "text",
+            "label" : "Faq Category Heading"
+          },
+          {
+            "id" : "faq-ques",
+            "type" : "textarea",
+            "label" : "Faq Question"
+          },
+          {
+            "id" : "faq-answer",
+            "type" : "textarea",
+            "label" : "Faq Answer"
+          }
+        ]
+      }
+    ],
+    "presets" : [
+      {
+        "name" : "FAQ",
+        "category" : "custom"
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

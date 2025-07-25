@@ -1,0 +1,24 @@
+<h2>Dashboard</h2>
+<div class="customer-greet">
+  <p>Hello!! {{ customer.name }} (not {{ customer.name }}? <a href="{{ routes.account_logout_url }}">Logout</a>)</p>
+</div>
+<div class="order-book">
+  <div class="summary-dash">
+    <div class="short-summary-box">
+      <p>{{ customer.orders_count }}</p>
+    </div>
+    <p class="box-title">Total Orders</p>
+  </div>
+  <div class="summary-dash">
+    <div class="short-summary-box">
+      <p>{{ customer.addresses_count }}</p>
+    </div>
+    <p class="box-title">Saved Addresses</p>
+  </div>
+  <div class="summary-dash">
+    <div class="short-summary-box">
+      <p class="wishlist-h-count wishlist-total-count" data-total="0">0</p>
+    </div>
+    <p class="box-title">Wishlist</p>
+  </div>
+</div>

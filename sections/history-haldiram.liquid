@@ -1,0 +1,112 @@
+<section class="explore-history{% if template.name  == 'page' %} page--{{ page.id }}{% endif %}">
+  <div class="history-wrapper">
+    <div class="hr-collage">
+      <div class="desktop-frame">
+        {% if section.settings.img-desk != blank %}
+          <img src="{{ section.settings.img-desk | img_url:'' }}">
+        <style>.desktop-frame img:hover {
+          filter: unset;
+        }</style>
+        {% else %}
+          {% render 'history-frame' %}
+        {% endif %}
+      </div>
+      <div class="mobile-frame">
+          <img src="{{ section.settings.his-img-m | img_url: '' }}" >
+      </div>
+    </div>
+    <div class="history-hr">
+      <p>{{ section.settings.context }}</p>
+      <div class="hr-wrapper-content">
+        <h3>{{ section.settings.hi-title }}</h3>
+        {% if section.settings.labl != blank %}
+        <a href="{{ section.settings.urle }}" class="history-url">{{ section.settings.labl }}<span><i class="far fa-arrow-right"></i></span></a>
+          {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+    .mobile-frame {
+    display: none;
+}
+    @media screen and (max-width: 600px){
+    .mobile-frame {
+      display: block;
+    }
+    .desktop-frame{
+      display:none;
+    }
+  }
+</style>
+
+{% schema %}
+  {
+    "name": "Haldiram History",
+    "settings": [
+      {
+        "id" : "img-desk",
+        "type" : "image_picker",
+        "label" : "Collage Image"
+      },
+      {
+        "id" : "his-img-m",
+        "type" : "image_picker",
+        "label" : "Collage Image Mobile"
+      },
+      {
+        "id" : "context",
+        "type" : "textarea",
+        "label" : "History Content"
+      },
+      {
+        "id" : "hi-title",
+        "type" : "textarea",
+        "label" : "History Title"
+      },
+      {
+        "id" : "urle",
+        "type" : "url",
+        "label" : "History Link"
+      },
+      {
+        "id" : "labl",
+        "type" : "text",
+        "label" : "Button Label",
+        "default" : "Read More"
+      }
+    ],
+    "blocks" : [
+      {
+        "name" : "Frame Image",
+        "type" : "image",
+        "limit" : 2,
+        "settings" : [
+          {
+            "id" : "img-one",
+            "type" : "image_picker",
+            "label" : "Frame Image"
+          },
+          {
+            "id" : "img-two",
+            "type" : "image_picker",
+            "label" : "Frame Image"
+          }
+        ]
+      }
+    ],
+    "presets" : [
+      {
+        "name" : "Haldiram History",
+        "category" : "custom"
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

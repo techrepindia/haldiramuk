@@ -1,0 +1,122 @@
+<section class="collection-listing-all">
+  <div class="collection-list-wrapper">
+    {% for collection in collections %}
+      <div class="collection-item {{ collection.title | downcase | replace: ' ','-' }}">
+        <a href="{{ collection.url }}">
+          <div class="img-swrapper-collecton">
+            <img class="collection-img" src="{{ collection.featured_image | img_url: '435x290' }}" width="100%" height="auto">
+          </div>
+          <span>{{ collection.title }} <span class="icon-wrap"><svg viewBox="0 0 14 10" fill="none" aria-hidden="true" focusable="false" class="icon icon-arrow" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M8.537.808a.5.5 0 01.817-.162l4 4a.5.5 0 010 .708l-4 4a.5.5 0 11-.708-.708L11.793 5.5H1a.5.5 0 010-1h10.793L8.646 1.354a.5.5 0 01-.109-.546z" fill="currentColor">
+</path></svg>
+</span></span>
+        </a>
+      </div>  
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+  {
+    "name": "Collection List",
+    "settings": [],
+    "presets" : [
+      {
+        "name" : "Collection List"
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
+<style>
+  .collection-item.all,.collection-item.best-offers,.collection-item.gifting,.collection-item.instant-food,.collection-item.new-arrivals,
+  .collection-item.popular-pick,.collection-item.savouries,.collection-item.sweets {
+    display: none;
+}
+
+.collection-list-wrapper {
+    display: flex;
+    max-width: 90%;
+    margin: auto;
+    flex-wrap: wrap;
+}
+  .collection-item.tin-sweets {
+    order: 1;
+}
+  .collection-item.ambient-sweets {
+    order: 2;
+}
+  .collection-item.namkeen {
+    order: 3;
+}
+  .collection-item.southern-delights {
+    order: 4;
+}.collection-item.tea-snacks {
+    order: 5;
+}.collection-item.instant-mixes {
+    order: 6;
+}.collection-item.ready-to-eat {
+    order: 7;
+}.collection-item.quick-meals {
+    order: 8;
+}
+  div#page--121551487254 {
+    padding: 60px 20px 30px;
+    width: 90%;
+    text-align: left;
+}
+  #page--121551487254 .page-header {
+    text-align: left;
+    margin: 0 !important;
+}
+.collection-item a {
+    text-align: center;
+    display: block;
+    font-size: 16px;
+    color: #000;
+    letter-spacing: 0.02rem;
+    font-family: 'Coconat';
+}
+.collection-item {
+    padding: 10px 20px;
+    width: 33%;
+}
+.collection-item a:hover .collection-img {
+    transform: scale(1.2);
+    transition: 4s linear;
+}
+img.collection-img {
+    transition: 4s linear;
+    height: 100%;
+    object-fit: cover;
+}
+.img-swrapper-collecton {
+    overflow: hidden;
+}
+
+@media screen and (max-width: 1024px){
+.collection-item {
+    padding: 10px 10px;
+}
+  div#page--121551487254 {
+    padding: 60px 0 30px;
+}
+}
+
+@media screen and (max-width: 650px){
+.collection-item {
+    width: 50%;
+}
+}
+@media screen and (max-width: 425px){
+.collection-item {
+    width: 100%;
+}
+}
+</style>
+

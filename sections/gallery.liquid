@@ -1,0 +1,82 @@
+{% schema %}
+{
+  "name": "Gallery",
+  "settings": [
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top Padding",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom Padding",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "Image Alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "image_name",
+          "label": "Image Name",
+          "default": "Gallery Image"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "category": "Gallery"
+    }
+  ]
+}
+{% endschema %}
+
+<div class="gallery gallery--{{ section.settings.alignment }}" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px;">
+  {% for block in section.blocks %}
+    {% if block.settings.image %}
+      <a href="{{ block.settings.image | img_url: '1024x1024' }}" class="gallery-item">
+        <img src="{{ block.settings.image | img_url: '600x600' }}" alt="{{ block.settings.image_name }}" loading="lazy">
+        <figcaption>{{ block.settings.image_name }}</figcaption>
+      </a>
+    {% endif %}
+  {% endfor %}

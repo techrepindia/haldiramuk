@@ -1,0 +1,123 @@
+<section class="collection-banner">
+  <div class="banner-wrapper">
+    <picture>
+      {% if collection.metafields.custom.collection_banner_mobile != blank %}
+        <source media="(max-width: 600px)" srcset="{{ collection.metafields.custom.collection_banner_mobile | img_url: '' }}">
+      {% elsif section.settings.mobile_banner != blank %}
+        <source media="(max-width: 600px)" srcset="{{ section.settings.mobile_banner | img_url: '' }}">
+      {% endif %}
+
+      {% if collection.metafields.custom.collection_banner_desktop != blank %}
+        <source media="(min-width: 601px)" srcset="{{ collection.metafields.custom.collection_banner_desktop | img_url: '' }}">
+        <img 
+          src="{{ collection.metafields.custom.collection_banner_desktop | img_url: '1200x400' }}" 
+          class="col-img" 
+          width="1200" 
+          height="400" 
+          style="width: 100%; height: auto; object-fit: cover;" 
+          alt="Collection Banner Desktop">
+      {% else %}
+        <img 
+          src="{{ section.settings.def-img | img_url: '1200x400'}}" 
+          class="col-img" 
+          width="1200" 
+          height="400" 
+          style="width: 100%; height: auto; object-fit: cover;" 
+          alt="Collection Banner Default">
+      {% endif %}
+    </picture>
+
+    <div class="bottom-banner">
+      <div class="banner-container">
+        <div class="banner-content-area">
+          <div class="icon-col">
+            <svg width="30" height="29" viewBox="0 0 30 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M14.9972 6.36791L21.6749 0.24884L21.0138 9.23622L30 10.6021L22.5014 15.694L27.0303 23.5068L18.3361 20.8679L14.9972 29.2488L11.6639 20.8679L2.9697 23.5068L7.49861 15.694L0 10.6021L8.98622 9.23622L8.32506 0.24884L14.9972 6.36791Z" fill="#FFF1E6"/>
+            </svg>
+          </div>
+          <h4>{{ collection.title | upcase }}</h4>
+
+          {% if collection.description != blank %}
+            <p>{{ collection.description }}</p>
+            <style>
+              @media(max-width:600px){
+                .banner-wrapper {
+                  min-height: 247px;
+               }
+              }
+            </style>
+          {% else %}
+            <style>
+              @media(max-width:600px){
+                .banner-wrapper {
+                  min-height: 180px;
+              }
+              }
+            </style>
+          {% endif %}
+        </div>
+
+        <div class="button-bottom">
+          <a id="scroller" href="javascript:void(0);" >
+            <svg width="48" height="49" viewBox="0 0 48 49" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="24" cy="24.2488" r="24" transform="rotate(90 24 24.2488)" fill="#FFF1E6"/>
+              <path d="M24 17.2488L24 31.7488M24 31.7488L30 25.7488M24 31.7488L18 25.7488" stroke="#CD9951" stroke-width="1.5"/>
+            </svg>
+          </a>
+        </div>
+      </div>   
+    </div>         
+  </div>
+</section>
+
+<!-- BreadcrumbList Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.haldiramuk.com"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Gluten-Free Range",
+      "item": "https://www.haldiramuk.com/collections/gluten-free-range"
+    }
+  ]
+}
+</script>
+
+{% schema %}
+{
+  "name": "Collection Page Banner",
+  "settings": [
+    {
+      "id": "def-img",
+      "type": "image_picker",
+      "label": "Collection Banner Default Image"
+    },
+    {
+      "id": "mobile_banner",
+      "type": "image_picker",
+      "label": "Collection Banner Mobile Image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collection Page Banner",
+      "category": "custom"
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
